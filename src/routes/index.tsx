@@ -25,7 +25,7 @@ import hero from "@/assets/hero.jpg";
 import rings from "@/assets/rings.jpg";
 import about1 from "@/assets/about1.jpg";
 import about2 from "@/assets/about2.jpg";
-import nivesahLogo from "@/assets/Nivesah logo.png";
+import nivesahLogo from "@/assets/Nivesah 4K-3.png";
 import p1 from "@/assets/p1.jpg";
 import p2 from "@/assets/p2.jpg";
 import p3 from "@/assets/p3.jpg";
@@ -148,7 +148,7 @@ function Nav() {
           <img
             src={nivesahLogo}
             alt="Nivesah Weddings by iFilms Media"
-            className={`h-12 w-auto rounded-sm bg-white/95 p-1.5 transition-all duration-500 ${
+            className={`h-11 w-[125px] sm:w-[135px] lg:w-[145px] object-contain object-left rounded-sm bg-white/95 p-1 transition-all duration-500 ${
               scrolled ? "shadow-sm" : "shadow-[0_10px_30px_-18px_rgba(0,0,0,0.85)]"
             }`}
           />
@@ -783,7 +783,7 @@ function Footer() {
             <img
               src={nivesahLogo}
               alt="Nivesah Weddings by iFilms Media"
-              className="h-20 w-auto rounded-sm bg-white p-2"
+              className="h-20 w-[280px] object-contain object-left rounded-sm bg-white p-2"
             />
             <span className="font-display text-3xl">Nivesah</span>
             <span className="eyebrow text-champagne mt-2">Weddings · iFilms Media</span>

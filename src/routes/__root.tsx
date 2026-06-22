@@ -10,6 +10,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import nivesahLogo from "../assets/Nivesah 4K-3.png";
+import hero from "../assets/hero.jpg";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -77,21 +79,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Nivesah Weddings offers ultra-premium, visually stunning single-page websites for luxury wedding photography and cinematography brands." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Nivesah Weddings offers ultra-premium, visually stunning single-page websites for luxury wedding photography and cinematography brands." },
+      { title: "Nivesah Weddings by iFilms Media" },
+      {
+        name: "description",
+        content:
+          "Nivesah Weddings offers ultra-premium, visually stunning single-page websites for luxury wedding photography and cinematography brands.",
+      },
+      { name: "author", content: "Nivesah Weddings by iFilms Media" },
+      { property: "og:title", content: "Nivesah Weddings by iFilms Media" },
+      {
+        property: "og:description",
+        content:
+          "Nivesah Weddings offers ultra-premium, visually stunning single-page websites for luxury wedding photography and cinematography brands.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Nivesah Weddings offers ultra-premium, visually stunning single-page websites for luxury wedding photography and cinematography brands." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6462a9c3-72fc-4706-bc2d-e403a70968ea/id-preview-8c8915c0--34700e98-fccd-4a60-96e3-a16f163c27e1.lovable.app-1781240203580.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6462a9c3-72fc-4706-bc2d-e403a70968ea/id-preview-8c8915c0--34700e98-fccd-4a60-96e3-a16f163c27e1.lovable.app-1781240203580.png" },
+      { name: "twitter:title", content: "Nivesah Weddings by iFilms Media" },
+      {
+        name: "twitter:description",
+        content:
+          "Nivesah Weddings offers ultra-premium, visually stunning single-page websites for luxury wedding photography and cinematography brands.",
+      },
+      { property: "og:image", content: hero },
+      { name: "twitter:image", content: hero },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: nivesahLogo, type: "image/png" },
+      { rel: "apple-touch-icon", href: nivesahLogo },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
