@@ -126,7 +126,7 @@ function Nav() {
           <img
             src={nivesahLogo}
             alt="Nivesah Weddings by iFilms Media"
-            className={`h-11 w-[125px] sm:w-[135px] lg:w-[145px] object-contain object-left rounded-sm bg-white/95 p-1 transition-all duration-500 ${
+            className={`h-11 w-[125px] sm:w-[135px] lg:w-[145px] object-contain object-left rounded-xl bg-white/95 p-1 transition-all duration-500 ${
               scrolled ? "shadow-sm" : "shadow-[0_10px_30px_-18px_rgba(0,0,0,0.85)]"
             }`}
           />
@@ -232,7 +232,7 @@ function Hero() {
           </div>
 
           <div className="lg:col-span-4 relative hidden lg:block">
-            <div className="glass rounded-sm p-3 animate-float">
+            <div className="glass rounded-sm bg-ivory/88 border border-white/60 p-3 animate-float">
               <img
                 src={rings}
                 alt="Wedding rings with roses"
@@ -240,16 +240,16 @@ function Hero() {
                 width={800}
                 height={1024}
               />
-              <div className="px-2 pt-4 pb-2 flex items-center justify-between text-ivory">
+              <div className="px-2 pt-4 pb-2 flex items-center justify-between text-ink">
                 <div>
-                  <p className="eyebrow text-champagne">Vol. 01</p>
+                  <p className="eyebrow text-olive">Vol. 01</p>
                   <p className="font-display text-xl mt-1">Forever, Captured</p>
                 </div>
-                <Sparkles className="size-5 text-champagne" />
+                <Sparkles className="size-5 text-olive" />
               </div>
             </div>
-            <div className="absolute -top-8 -left-10 glass rounded-sm px-5 py-4 text-ivory hidden xl:block">
-              <p className="eyebrow text-champagne">Since 2017</p>
+            <div className="absolute -top-8 -left-10 glass rounded-sm bg-ivory/88 border border-white/60 px-5 py-4 text-ink hidden xl:block">
+              <p className="eyebrow text-olive">Since 2017</p>
               <p className="font-display text-2xl leading-none mt-2">100+ Weddings</p>
             </div>
           </div>
@@ -348,11 +348,20 @@ function Services() {
     <section
       id="services"
       ref={ref}
-      className="relative py-28 lg:py-40 bg-[oklch(0.97_0.012_80)]"
+      className="relative overflow-hidden py-28 lg:py-40 bg-[oklch(0.97_0.012_80)]"
     >
+      <div className="absolute inset-0">
+        <img
+          src={about2}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover opacity-[0.12] scale-105"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(247,242,233,0.9),rgba(247,242,233,0.95))]" />
+      </div>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16"
+          className="relative flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16"
           data-reveal
         >
           <div>
@@ -372,11 +381,11 @@ function Services() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border" data-reveal>
+        <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/60" data-reveal>
           {SERVICES.map(({ icon: Icon, title, desc }, i) => (
             <article
               key={title}
-              className="group relative bg-ivory p-8 lg:p-10 transition-all duration-500 hover:bg-card"
+              className="group relative border border-white/35 bg-ivory/72 p-8 lg:p-10 backdrop-blur-[2px] transition-all duration-500 hover:bg-ivory/88"
             >
               <span className="absolute top-6 right-6 text-[0.65rem] tracking-[0.3em] text-olive/70">
                 / {String(i + 1).padStart(2, "0")}
@@ -467,7 +476,7 @@ const TRUST = [
 function Trust() {
   const ref = useReveal();
   return (
-    <section ref={ref} className="py-24 bg-ivory border-y border-border">
+    <section ref={ref} className="-mt-8 lg:-mt-12 py-24 bg-ivory border-y border-border">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-border"
@@ -475,7 +484,12 @@ function Trust() {
         >
           {TRUST.map(([k, v]) => (
             <div key={v} className="px-6 py-4 text-center">
-              <div className="font-display text-4xl md:text-5xl text-olive">{k}</div>
+              <div
+                className="text-4xl md:text-5xl text-olive leading-none"
+                style={{ fontFamily: '"Prata", serif' }}
+              >
+                {k}
+              </div>
               <p className="mt-2 text-[0.7rem] tracking-[0.28em] uppercase text-foreground/60">
                 {v}
               </p>
@@ -745,6 +759,8 @@ function Field({
           name={name}
           type={type}
           className={cls}
+          autoComplete={type === "date" ? "off" : undefined}
+          defaultValue={type === "date" ? "" : undefined}
           required={name === "name" || name === "phone"}
         />
       )}
