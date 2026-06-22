@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   Camera,
@@ -32,27 +31,6 @@ import p3 from "@/assets/p3.jpg";
 import p4 from "@/assets/p4.jpg";
 import p5 from "@/assets/p5.jpg";
 import p6 from "@/assets/p6.jpg";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Nivesah — Weddings by iFilms Media | Luxury Wedding Films" },
-      {
-        name: "description",
-        content:
-          "Nivesah Weddings by iFilms Media — luxury wedding photography and cinematic films that turn your special day into timeless memories.",
-      },
-      { property: "og:title", content: "Nivesah — Weddings by iFilms Media" },
-      {
-        property: "og:description",
-        content: "Your wedding, told like cinema. Editorial photography and cinematic films.",
-      },
-      { property: "og:image", content: hero },
-    ],
-  }),
-  component: Index,
-});
-
 const WHATSAPP = "918446752571";
 const PHONE_DISPLAY = "+91 8446752571";
 const WA_MSG = encodeURIComponent(
@@ -861,7 +839,7 @@ function WhatsAppFab() {
   );
 }
 
-function Index() {
+export default function App() {
   return (
     <main className="bg-ivory text-ink">
       <Hero />
