@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type RefObject } from "react";
 import {
   Camera,
   Film,
@@ -31,12 +31,154 @@ import p3 from "@/assets/p3.jpg";
 import p4 from "@/assets/p4.jpg";
 import p5 from "@/assets/p5.jpg";
 import p6 from "@/assets/p6.jpg";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 const WHATSAPP = "918446752571";
 const PHONE_DISPLAY = "+91 8446752571";
 const WA_MSG = encodeURIComponent(
   "Hello Nivesah Weddings,\n\nI would like to enquire about wedding services.\n\nName:\nWedding Date:\nLocation:\nService Required:\n\nPlease share package details.",
 );
 const WA_LINK = `https://wa.me/${WHATSAPP}?text=${WA_MSG}`;
+const SOCIALS = [
+  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
+] as const;
+
+const SERVICE_MESSAGES = {
+  "Wedding Photography":
+    "Hello Nivesah Weddings, I would love to enquire about Wedding Photography coverage for our celebration. Please share package details, availability, and the overall experience.",
+  Cinematography:
+    "Hello Nivesah Weddings, I am interested in Cinematography for our wedding. Please share your film coverage options, deliverables, and pricing.",
+  "Pre-Wedding Shoots":
+    "Hello Nivesah Weddings, we would like to enquire about a Pre-Wedding Shoot. Please guide us on locations, concepts, and package options.",
+  "Candid Photography":
+    "Hello Nivesah Weddings, I am looking for Candid Photography coverage for our wedding events. Please share your approach, availability, and pricing.",
+  "Wedding Films":
+    "Hello Nivesah Weddings, I would like to know more about your Wedding Films service. Please share details on trailers, highlight reels, and full film delivery.",
+  "Luxury Albums":
+    "Hello Nivesah Weddings, I am interested in your Luxury Albums. Please share album styles, finishes, and package details.",
+  "Professional Editing":
+    "Hello Nivesah Weddings, I would like to enquire about Professional Editing support for our wedding visuals. Please share details on editing, grading, and delivery timelines.",
+  "Event Planning":
+    "Hello Nivesah Weddings, we would like to enquire about Event Planning support for our wedding. Please share how your planning service works and what is included.",
+} as const;
+
+type ServiceTitle = keyof typeof SERVICE_MESSAGES;
+
+const ABOUT_CAROUSEL = [
+  {
+    primary: about1,
+    secondary: about2,
+    altPrimary: "Bride getting ready",
+    altSecondary: "Couple at sunset",
+    badge: "Est. 2017 · Mumbai",
+    kicker: "Bridal Mornings",
+    title: "Soft light, heirloom detail, and a story already unfolding.",
+  },
+  {
+    primary: p4,
+    secondary: p2,
+    altPrimary: "Bride and groom embracing outdoors",
+    altSecondary: "Bride smiling during celebration",
+    badge: "Destination Stories",
+    kicker: "Golden Hour",
+    title: "Cinematic portraits that feel intimate, warm, and timeless.",
+  },
+  {
+    primary: p1,
+    secondary: p6,
+    altPrimary: "Couple portrait in formal wedding attire",
+    altSecondary: "Wedding couple in a candid moment",
+    badge: "Luxury Coverage",
+    kicker: "Editorial Romance",
+    title: "Every frame composed with emotion, movement, and grace.",
+  },
+] as const;
+
+type EnquiryFormState = {
+  name: string;
+  phone: string;
+  date: string;
+  location: string;
+  service: string;
+  message: string;
+};
+
+type EnquiryErrors = Partial<Record<keyof EnquiryFormState, string>>;
+
+function useNumeralFont(ref: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+
+    const wrapNumerals = (textNode: Text) => {
+      const value = textNode.nodeValue;
+      const parent = textNode.parentElement;
+
+      if (!value || !/\d/.test(value) || !parent) return;
+      if (parent.closest(".font-numerals, script, style, textarea, input, select, option")) return;
+
+      const fragment = document.createDocumentFragment();
+      const pattern = /\d+/g;
+      let lastIndex = 0;
+      let match: RegExpExecArray | null;
+
+      while ((match = pattern.exec(value)) !== null) {
+        if (match.index > lastIndex) {
+          fragment.append(document.createTextNode(value.slice(lastIndex, match.index)));
+        }
+
+        const numeral = document.createElement("span");
+        numeral.className = "font-numerals";
+        numeral.textContent = match[0];
+        fragment.append(numeral);
+        lastIndex = match.index + match[0].length;
+      }
+
+      if (lastIndex < value.length) {
+        fragment.append(document.createTextNode(value.slice(lastIndex)));
+      }
+
+      parent.replaceChild(fragment, textNode);
+    };
+
+    const processNode = (node: Node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        wrapNumerals(node as Text);
+        return;
+      }
+
+      const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+      const textNodes: Text[] = [];
+
+      while (walker.nextNode()) {
+        textNodes.push(walker.currentNode as Text);
+      }
+
+      textNodes.forEach(wrapNumerals);
+    };
+
+    processNode(root);
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === "characterData") {
+          processNode(mutation.target);
+        }
+
+        mutation.addedNodes.forEach(processNode);
+      });
+    });
+
+    observer.observe(root, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+
+    return () => observer.disconnect();
+  }, [ref]);
+}
 
 function useReveal() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -233,13 +375,29 @@ function Hero() {
 
           <div className="lg:col-span-4 relative hidden lg:block">
             <div className="glass rounded-sm bg-ivory/88 border border-white/60 p-3 animate-float">
-              <img
-                src={rings}
-                alt="Wedding rings with roses"
-                className="w-full h-[420px] object-cover"
-                width={800}
-                height={1024}
-              />
+              <div className="relative">
+                <img
+                  src={rings}
+                  alt="Wedding rings with roses"
+                  className="w-full h-[420px] object-cover"
+                  width={800}
+                  height={1024}
+                />
+                <div className="absolute right-4 top-4 flex flex-col gap-2">
+                  {SOCIALS.map(({ icon: Icon, href, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={label}
+                      className="flex size-10 items-center justify-center rounded-full border border-white/55 bg-ivory/78 text-olive shadow-[0_12px_30px_-18px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-olive hover:text-ivory"
+                    >
+                      <Icon className="size-4" strokeWidth={1.6} />
+                    </a>
+                  ))}
+                </div>
+              </div>
               <div className="px-2 pt-4 pb-2 flex items-center justify-between text-ink">
                 <div>
                   <p className="eyebrow text-olive">Vol. 01</p>
@@ -260,6 +418,130 @@ function Hero() {
             <span className="hairline bg-ivory/40" /> Scroll{" "}
             <span className="hairline bg-ivory/40" />
           </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AdCarouselSection() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const onSelect = () => setActive(api.selectedScrollSnap());
+    onSelect();
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+
+    return () => {
+      api.off("select", onSelect);
+      api.off("reInit", onSelect);
+    };
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const timer = window.setInterval(() => {
+      api.scrollNext();
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [api]);
+
+  return (
+    <section className="relative py-24 lg:py-32 bg-[oklch(0.975_0.012_82)]">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="mb-10 md:mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-4 mb-5">
+              <span className="hairline" />
+              <span className="eyebrow">Featured Stories</span>
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] max-w-3xl">
+              A dedicated <em className="text-olive">showcase</em> for your signature wedding ads.
+            </h2>
+          </div>
+          <p className="max-w-md text-foreground/70 font-light leading-relaxed">
+            A separate auto carousel that highlights premium wedding frames without interrupting the
+            About section.
+          </p>
+        </div>
+
+        <div className="relative">
+      <Carousel
+        setApi={setApi}
+        opts={{ align: "start", loop: true }}
+        className="overflow-hidden"
+      >
+        <CarouselContent className="ml-0">
+          {ABOUT_CAROUSEL.map((slide) => (
+            <CarouselItem key={slide.title} className="pl-0">
+              <article className="relative overflow-hidden bg-[#f4ecdf] p-4 md:p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)]">
+                <div className="relative min-h-[520px] md:min-h-[640px]">
+                  <div className="absolute left-0 top-8 bottom-8 z-10 hidden md:flex flex-col items-center gap-3 text-olive/80">
+                    <span className="h-24 w-px bg-olive/45" />
+                    <span
+                      className="text-[0.62rem] tracking-[0.42em] uppercase"
+                      style={{ writingMode: "vertical-rl" }}
+                    >
+                      {slide.badge}
+                    </span>
+                  </div>
+
+                  <div className="relative h-full md:ml-10 md:mr-6 md:mb-12">
+                    <img
+                      src={slide.primary}
+                      alt={slide.altPrimary}
+                      className="h-[520px] md:h-[640px] w-full object-cover"
+                      loading="lazy"
+                    />
+
+                    <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-4 md:hidden">
+                      <div className="bg-ivory/88 px-3 py-2 text-[0.62rem] tracking-[0.28em] uppercase text-olive shadow-sm backdrop-blur-sm">
+                        {slide.badge}
+                      </div>
+                    </div>
+
+                    <div className="absolute inset-x-4 bottom-4 bg-ivory/88 p-4 backdrop-blur-sm md:left-8 md:bottom-8 md:max-w-sm">
+                      <p className="eyebrow">{slide.kicker}</p>
+                      <p className="mt-2 font-display text-2xl leading-[1.02] text-ink md:text-3xl">
+                        {slide.title}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="relative mx-auto -mt-28 w-[38%] min-w-[170px] max-w-[250px] md:absolute md:right-0 md:bottom-0 md:mt-0 md:w-[42%] md:max-w-[320px]">
+                    <img
+                      src={slide.secondary}
+                      alt={slide.altSecondary}
+                      className="h-[220px] w-full border-[10px] border-ivory object-cover shadow-2xl md:h-[300px]"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </article>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+
+      <div className="mt-8 flex items-center justify-center gap-3">
+        {ABOUT_CAROUSEL.map((slide, index) => (
+          <button
+            key={slide.title}
+            type="button"
+            onClick={() => api?.scrollTo(index)}
+            className={`h-2.5 rounded-full transition-all duration-300 ${
+              active === index ? "w-12 bg-olive" : "w-2.5 bg-olive/25 hover:bg-olive/45"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
         </div>
       </div>
     </section>
@@ -332,17 +614,63 @@ function About() {
 }
 
 const SERVICES = [
-  { icon: Camera, title: "Wedding Photography", desc: "Editorial portraits, candid moments and timeless frames." },
-  { icon: Film, title: "Cinematography", desc: "Feature-style wedding films with cinematic grading." },
-  { icon: Heart, title: "Pre-Wedding Shoots", desc: "Intimate love stories told across breathtaking locations." },
-  { icon: Aperture, title: "Candid Photography", desc: "Honest emotion, captured between the planned moments." },
-  { icon: Sparkles, title: "Wedding Films", desc: "Trailers, highlight reels and full ceremonial films." },
-  { icon: BookOpen, title: "Luxury Albums", desc: "Hand-bound, archival heirloom albums in fine materials." },
-  { icon: Scissors, title: "Professional Editing", desc: "Color, sound and story crafted in our private studio." },
-  { icon: CalendarCheck, title: "Event Planning", desc: "Coordinated execution so your day flows effortlessly." },
+  {
+    icon: Camera,
+    title: "Wedding Photography",
+    desc: "Editorial portraits, candid moments and timeless frames.",
+    image: p1,
+  },
+  {
+    icon: Film,
+    title: "Cinematography",
+    desc: "Feature-style wedding films with cinematic grading.",
+    image: p4,
+  },
+  {
+    icon: Heart,
+    title: "Pre-Wedding Shoots",
+    desc: "Intimate love stories told across breathtaking locations.",
+    image: about2,
+  },
+  {
+    icon: Aperture,
+    title: "Candid Photography",
+    desc: "Honest emotion, captured between the planned moments.",
+    image: p2,
+  },
+  {
+    icon: Sparkles,
+    title: "Wedding Films",
+    desc: "Trailers, highlight reels and full ceremonial films.",
+    image: hero,
+  },
+  {
+    icon: BookOpen,
+    title: "Luxury Albums",
+    desc: "Hand-bound, archival heirloom albums in fine materials.",
+    image: about1,
+  },
+  {
+    icon: Scissors,
+    title: "Professional Editing",
+    desc: "Color, sound and story crafted in our private studio.",
+    image: p6,
+  },
+  {
+    icon: CalendarCheck,
+    title: "Event Planning",
+    desc: "Coordinated execution so your day flows effortlessly.",
+    image: p5,
+  },
 ];
 
-function Services() {
+function Services({
+  onSelectService,
+  selectedService,
+}: {
+  onSelectService: (service: ServiceTitle | "") => void;
+  selectedService: ServiceTitle | "";
+}) {
   const ref = useReveal();
   return (
     <section
@@ -382,24 +710,43 @@ function Services() {
         </div>
 
         <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/60" data-reveal>
-          {SERVICES.map(({ icon: Icon, title, desc }, i) => (
-            <article
+          {SERVICES.map(({ icon: Icon, title, desc, image }, i) => (
+            <button
               key={title}
-              className="group relative border border-white/35 bg-ivory/72 p-8 lg:p-10 backdrop-blur-[2px] transition-all duration-500 hover:bg-ivory/88"
+              type="button"
+              onClick={() => onSelectService(title)}
+              className={`group relative isolate overflow-hidden border border-white/35 bg-ivory/82 p-8 lg:p-10 text-left backdrop-blur-[2px] transition-all duration-500 hover:bg-ivory/70 ${
+                selectedService === title ? "ring-1 ring-olive/40" : ""
+              }`}
             >
-              <span className="absolute top-6 right-6 text-[0.65rem] tracking-[0.3em] text-olive/70">
+              <div className="absolute inset-0 -z-20 overflow-hidden">
+                <img
+                  src={image}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-full w-full scale-110 object-cover opacity-0 transition-all duration-700 group-hover:scale-100 group-hover:opacity-100"
+                  loading="lazy"
+                />
+              </div>
+              <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(248,242,233,0.96),rgba(244,237,226,0.94))] transition-all duration-700 group-hover:bg-[linear-gradient(180deg,rgba(248,242,233,0.22),rgba(244,237,226,0.12))]" />
+              <div className="absolute inset-0 -z-10 bg-olive/0 transition-colors duration-700 group-hover:bg-olive/5" />
+              <span className="absolute top-6 right-6 text-[0.65rem] tracking-[0.3em] text-olive/70 transition-all duration-500 group-hover:translate-y-2 group-hover:opacity-0">
                 / {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="size-14 rounded-full border border-olive/40 flex items-center justify-center mb-8 group-hover:bg-olive group-hover:border-olive transition-colors">
+              <div className="relative size-14 rounded-full border border-olive/40 flex items-center justify-center mb-8 transition-all duration-500 group-hover:translate-y-3 group-hover:opacity-0">
                 <Icon
                   className="size-5 text-olive group-hover:text-ivory transition-colors"
                   strokeWidth={1.4}
                 />
               </div>
-              <h3 className="font-display text-2xl leading-snug">{title}</h3>
-              <p className="mt-3 text-sm text-foreground/65 leading-relaxed font-light">{desc}</p>
-              <span className="block mt-6 h-px w-0 bg-olive group-hover:w-full transition-all duration-700" />
-            </article>
+              <h3 className="relative font-display text-2xl leading-snug transition-all duration-500 group-hover:translate-y-4 group-hover:opacity-0">
+                {title}
+              </h3>
+              <p className="relative mt-3 text-sm text-foreground/70 leading-relaxed font-light transition-all duration-500 group-hover:translate-y-4 group-hover:opacity-0">
+                {desc}
+              </p>
+              <span className="relative block mt-6 h-px w-0 bg-olive transition-all duration-700 group-hover:w-full group-hover:opacity-0" />
+            </button>
           ))}
         </div>
       </div>
@@ -466,31 +813,39 @@ function Experience() {
 
 const TRUST = [
   ["100+", "Weddings Captured"],
-  ["50+", "Happy Couples"],
   ["8+", "Years Creative Experience"],
   ["4K", "Cinematic Delivery"],
-  ["Pro", "Editing Workflow"],
   ["1:1", "Personalised Storytelling"],
 ] as const;
 
 function Trust() {
   const ref = useReveal();
   return (
-    <section ref={ref} className="-mt-8 lg:-mt-12 py-24 bg-ivory border-y border-border">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <section
+      ref={ref}
+      className="-mt-8 lg:-mt-12 w-full border-y border-border bg-[linear-gradient(180deg,#f8f2e9_0%,#f4ede2_100%)] py-16 lg:py-20"
+    >
+      <div className="w-full px-0">
         <div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-border"
+          className="grid grid-cols-2 lg:grid-cols-4 border-y border-border/80"
           data-reveal
         >
-          {TRUST.map(([k, v]) => (
-            <div key={v} className="px-6 py-4 text-center">
+          {TRUST.map(([k, v], index) => (
+            <div
+              key={v}
+              className={`flex min-h-[180px] flex-col items-center justify-center px-8 py-10 text-center ${
+                index % 2 === 0 ? "border-r border-border/80 lg:border-r" : "lg:border-r border-border/80"
+              } ${index === TRUST.length - 1 ? "border-r-0" : ""} ${
+                index === 1 ? "border-r-0 lg:border-r" : ""
+              }`}
+            >
               <div
-                className="text-4xl md:text-5xl text-olive leading-none"
+                className="text-5xl md:text-6xl text-olive leading-none"
                 style={{ fontFamily: '"Prata", serif' }}
               >
                 {k}
               </div>
-              <p className="mt-2 text-[0.7rem] tracking-[0.28em] uppercase text-foreground/60">
+              <p className="mt-4 max-w-[16ch] text-[0.72rem] tracking-[0.34em] uppercase text-foreground/60">
                 {v}
               </p>
             </div>
@@ -502,16 +857,60 @@ function Trust() {
 }
 
 const PORTFOLIO = [
-  { img: p1, couple: "Aanya & Vihaan", loc: "Udaipur, Rajasthan", h: "row-span-2" },
-  { img: p2, couple: "Riya & Arjun", loc: "Pune, Maharashtra", h: "" },
-  { img: p3, couple: "Meera & Kabir", loc: "Jaipur Palace", h: "" },
-  { img: p4, couple: "Saanvi & Ishaan", loc: "Goa Coastline", h: "row-span-2" },
-  { img: p5, couple: "Naina & Veer", loc: "Mumbai Heritage", h: "" },
-  { img: p6, couple: "Anushka & Aarav", loc: "Delhi Reception", h: "" },
+  {
+    img: p1,
+    couple: "Aanya & Vihaan",
+    loc: "Udaipur, Rajasthan",
+    h: "row-span-2",
+    gallery: [p1, about1, p6],
+  },
+  {
+    img: p2,
+    couple: "Riya & Arjun",
+    loc: "Pune, Maharashtra",
+    h: "",
+    gallery: [p2, about2, p1],
+  },
+  {
+    img: p3,
+    couple: "Meera & Kabir",
+    loc: "Jaipur Palace",
+    h: "",
+    gallery: [p3, p5, about2],
+  },
+  {
+    img: p4,
+    couple: "Saanvi & Ishaan",
+    loc: "Goa Coastline",
+    h: "row-span-2",
+    gallery: [p4, p6, about1],
+  },
+  {
+    img: p5,
+    couple: "Naina & Veer",
+    loc: "Mumbai Heritage",
+    h: "",
+    gallery: [p5, p3, p2],
+  },
+  {
+    img: p6,
+    couple: "Anushka & Aarav",
+    loc: "Delhi Reception",
+    h: "",
+    gallery: [p6, p4, p1],
+  },
 ];
 
 function Portfolio() {
   const ref = useReveal();
+  const [activeStory, setActiveStory] = useState<(typeof PORTFOLIO)[number] | null>(null);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+
+  const openStory = (story: (typeof PORTFOLIO)[number]) => {
+    setActiveStory(story);
+    setActiveImage(story.gallery[0]);
+  };
+
   return (
     <section id="portfolio" ref={ref} className="py-28 lg:py-40 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -541,7 +940,13 @@ function Portfolio() {
           data-reveal
         >
           {PORTFOLIO.map((p, i) => (
-            <figure key={i} className={`group relative overflow-hidden ${p.h}`}>
+            <button
+              key={i}
+              type="button"
+              onClick={() => openStory(p)}
+              className={`group relative overflow-hidden text-left cursor-pointer ${p.h}`}
+              aria-label={`Open ${p.couple} story gallery`}
+            >
               <img
                 src={p.img}
                 alt={p.couple}
@@ -549,7 +954,7 @@ function Portfolio() {
                 className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent opacity-90" />
-              <figcaption className="absolute inset-x-0 bottom-0 p-6 lg:p-8 text-ivory">
+              <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8 text-ivory">
                 <p className="eyebrow text-champagne flex items-center gap-2">
                   <MapPin className="size-3" /> {p.loc}
                 </p>
@@ -557,11 +962,73 @@ function Portfolio() {
                 <span className="mt-3 inline-flex items-center gap-2 text-[0.7rem] tracking-[0.3em] uppercase opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                   View Story <ArrowUpRight className="size-3.5" />
                 </span>
-              </figcaption>
-            </figure>
+              </div>
+            </button>
           ))}
         </div>
       </div>
+
+      <Dialog
+        open={!!activeStory}
+        onOpenChange={(open) => {
+          if (!open) {
+            setActiveStory(null);
+            setActiveImage(null);
+          }
+        }}
+      >
+        {activeStory ? (
+          <DialogContent className="max-w-6xl border-none bg-[oklch(0.965_0.012_78)] p-0 overflow-hidden">
+            <DialogTitle className="sr-only">{activeStory.couple} gallery</DialogTitle>
+            <div className="grid lg:grid-cols-[minmax(0,1.6fr)_360px]">
+              <div className="bg-ink">
+                <img
+                  src={activeImage ?? activeStory.gallery[0]}
+                  alt={activeStory.couple}
+                  className="h-[55vh] w-full object-cover lg:h-[80vh]"
+                />
+              </div>
+              <div className="p-6 lg:p-8">
+                <p className="eyebrow flex items-center gap-2">
+                  <MapPin className="size-3" /> {activeStory.loc}
+                </p>
+                <h3 className="mt-3 font-display text-4xl leading-none text-ink">
+                  {activeStory.couple}
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-foreground/70">
+                  Explore related frames from the same story. Click any image below to preview it
+                  in the main view.
+                </p>
+
+                <div className="mt-8 grid grid-cols-3 gap-3">
+                  {activeStory.gallery.map((image, index) => {
+                    const isActive = (activeImage ?? activeStory.gallery[0]) === image;
+                    return (
+                      <button
+                        key={`${activeStory.couple}-${index}`}
+                        type="button"
+                        onClick={() => setActiveImage(image)}
+                        className={`overflow-hidden border transition-all ${
+                          isActive
+                            ? "border-olive shadow-[0_0_0_2px_rgba(112,125,76,0.15)]"
+                            : "border-border hover:border-olive/50"
+                        }`}
+                        aria-label={`Show related image ${index + 1} for ${activeStory.couple}`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${activeStory.couple} related ${index + 1}`}
+                          className="h-28 w-full object-cover"
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        ) : null}
+      </Dialog>
     </section>
   );
 }
@@ -656,9 +1123,117 @@ const FAQS = [
   },
 ];
 
-function ContactAndFaq() {
+function ContactAndFaq({
+  selectedService,
+  onSelectService,
+}: {
+  selectedService: ServiceTitle | "";
+  onSelectService: (service: ServiceTitle | "") => void;
+}) {
   const ref = useReveal();
   const [open, setOpen] = useState<number | null>(0);
+  const [form, setForm] = useState<EnquiryFormState>({
+    name: "",
+    phone: "",
+    date: "",
+    location: "",
+    service: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState<EnquiryErrors>({});
+  const validate = (values: EnquiryFormState) => {
+    const nextErrors: EnquiryErrors = {};
+
+    if (values.name.trim().length < 2) nextErrors.name = "Please enter your full name.";
+    if (!/^\+?[0-9\s-]{10,15}$/.test(values.phone.trim())) {
+      nextErrors.phone = "Please enter a valid phone number.";
+    }
+    if (!values.date) nextErrors.date = "Please select your wedding date.";
+    if (!values.location.trim()) nextErrors.location = "Please enter your wedding location.";
+    if (!values.service.trim()) nextErrors.service = "Please choose the service you need.";
+    if (values.message.trim().length < 20) {
+      nextErrors.message = "Please add a short message with a few details.";
+    }
+
+    return nextErrors;
+  };
+
+  const handleFieldChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = event.target;
+
+    setForm((current) => ({ ...current, [name]: value }));
+    setErrors((current) => ({ ...current, [name]: "" }));
+
+    if (name === "service") {
+      const matchedService = SERVICES.find((item) => item.title === value);
+      if (matchedService) {
+        onSelectService(matchedService.title);
+      } else {
+        onSelectService("");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (!selectedService) return;
+
+    setForm((current) => ({
+      ...current,
+      service: selectedService,
+      message:
+        !current.message || current.message === SERVICE_MESSAGES[current.service as keyof typeof SERVICE_MESSAGES]
+          ? SERVICE_MESSAGES[selectedService]
+          : current.message,
+    }));
+    setErrors((current) => ({ ...current, service: "", message: "" }));
+    document.getElementById("contact-form-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [selectedService]);
+
+  const clearPrefill = () => {
+    const serviceBeforeClear = form.service as keyof typeof SERVICE_MESSAGES;
+    const isPrefilledMessage =
+      serviceBeforeClear && form.message === SERVICE_MESSAGES[serviceBeforeClear];
+
+    setForm((current) => ({
+      ...current,
+      service: "",
+      message: isPrefilledMessage ? "" : current.message,
+    }));
+    setErrors((current) => ({ ...current, service: "", message: "" }));
+    onSelectService("");
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const nextErrors = validate(form);
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      return;
+    }
+
+    const msg = encodeURIComponent(
+      [
+        "Hello Nivesah Weddings,",
+        "",
+        "I would like to enquire about your wedding services.",
+        "",
+        `Name: ${form.name.trim()}`,
+        `Phone Number: ${form.phone.trim()}`,
+        `Wedding Date: ${form.date}`,
+        `Wedding Location: ${form.location.trim()}`,
+        `Service Required: ${form.service.trim()}`,
+        "",
+        "Message:",
+        form.message.trim(),
+      ].join("\n"),
+    );
+
+    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
+  };
+
   return (
     <section id="contact" ref={ref} className="py-28 lg:py-40 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-14">
@@ -699,7 +1274,7 @@ function ContactAndFaq() {
         </div>
 
         <div className="lg:col-span-6" data-reveal>
-          <div className="bg-ink text-ivory p-8 lg:p-12 grain relative">
+          <div id="contact-form-panel" className="bg-ink text-ivory p-8 lg:p-12 grain relative">
             <div className="flex items-center gap-4 mb-6">
               <span className="hairline bg-champagne" />
               <span className="eyebrow text-champagne">Begin Your Story</span>
@@ -707,21 +1282,68 @@ function ContactAndFaq() {
             <h3 className="font-display text-3xl md:text-4xl leading-[1.05] mb-8">
               Tell us about your <em className="text-champagne">wedding.</em>
             </h3>
-            <form
-              className="space-y-5"
-              onSubmit={(e) => {
-                e.preventDefault();
-                window.open(WA_LINK, "_blank");
-              }}
-            >
-              <div className="grid md:grid-cols-2 gap-5">
-                <Field label="Name" name="name" />
-                <Field label="Phone Number" name="phone" type="tel" />
-                <Field label="Wedding Date" name="date" type="date" />
-                <Field label="Wedding Location" name="location" />
+            {selectedService ? (
+              <div className="mb-6 flex items-start justify-between gap-4 border border-champagne/30 bg-champagne/10 p-4 text-sm text-ivory/85">
+                <div>
+                  <p className="eyebrow text-champagne">Prefilled Enquiry</p>
+                  <p className="mt-2 leading-relaxed">
+                    Your form is prepared for <span className="text-champagne">{selectedService}</span>.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={clearPrefill}
+                  className="shrink-0 rounded-full border border-champagne/35 p-2 text-champagne transition-colors hover:bg-champagne hover:text-ink"
+                  aria-label="Clear prefilled service"
+                >
+                  <Minus className="size-4" />
+                </button>
               </div>
-              <Field label="Service Required" name="service" />
-              <Field label="Message" name="message" textarea />
+            ) : null}
+            <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+              <div className="grid md:grid-cols-2 gap-5">
+                <Field label="Name" name="name" value={form.name} onChange={handleFieldChange} error={errors.name} />
+                <Field
+                  label="Phone Number"
+                  name="phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={handleFieldChange}
+                  error={errors.phone}
+                />
+                <Field
+                  label="Wedding Date"
+                  name="date"
+                  type="date"
+                  value={form.date}
+                  onChange={handleFieldChange}
+                  error={errors.date}
+                />
+                <Field
+                  label="Wedding Location"
+                  name="location"
+                  value={form.location}
+                  onChange={handleFieldChange}
+                  error={errors.location}
+                />
+              </div>
+              <Field
+                label="Service Required"
+                name="service"
+                value={form.service}
+                onChange={handleFieldChange}
+                error={errors.service}
+                placeholder="Wedding Photography / Cinematography / Event Planning"
+              />
+              <Field
+                label="Message"
+                name="message"
+                value={form.message}
+                onChange={handleFieldChange}
+                error={errors.message}
+                textarea
+                placeholder="Tell us about your wedding vision, function count, venue, and anything special you want us to know."
+              />
               <button
                 type="submit"
                 className="w-full md:w-auto inline-flex items-center justify-center gap-3 mt-2 px-10 py-4 bg-champagne text-ink text-xs tracking-[0.35em] uppercase border border-champagne hover:bg-transparent hover:text-champagne transition-all duration-500"
@@ -741,11 +1363,19 @@ function Field({
   name,
   type = "text",
   textarea = false,
+  value,
+  onChange,
+  error,
+  placeholder,
 }: {
   label: string;
   name: string;
   type?: string;
   textarea?: boolean;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  error?: string;
+  placeholder?: string;
 }) {
   const cls =
     "w-full bg-transparent border-b border-ivory/30 focus:border-champagne outline-none py-3 text-ivory placeholder:text-ivory/40 transition-colors";
@@ -753,17 +1383,26 @@ function Field({
     <label className="block">
       <span className="text-[0.65rem] tracking-[0.3em] uppercase text-ivory/60">{label}</span>
       {textarea ? (
-        <textarea name={name} rows={3} className={cls} required={name === "name"} />
+        <textarea
+          name={name}
+          rows={3}
+          className={`${cls} ${error ? "border-terracotta" : ""}`}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
       ) : (
         <input
           name={name}
           type={type}
-          className={cls}
-          autoComplete={type === "date" ? "off" : undefined}
-          defaultValue={type === "date" ? "" : undefined}
-          required={name === "name" || name === "phone"}
+          className={`${cls} ${error ? "border-terracotta" : ""}`}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          autoComplete={type === "date" ? "off" : name}
         />
       )}
+      {error ? <span className="mt-2 block text-xs text-terracotta">{error}</span> : null}
     </label>
   );
 }
@@ -779,8 +1418,7 @@ function Footer() {
               alt="Nivesah Weddings by iFilms Media"
               className="h-20 w-[280px] object-contain object-left rounded-sm bg-white p-2"
             />
-            <span className="font-display text-3xl">Nivesah</span>
-            <span className="eyebrow text-champagne mt-2">Weddings · iFilms Media</span>
+            <span className="font-display text-3xl whitespace-nowrap">Nivesah Weddings</span>
           </div>
           <p className="mt-6 max-w-sm text-ivory/60 font-light leading-relaxed">
             A boutique atelier preserving wedding stories with dedication, precision and a personal
@@ -808,26 +1446,30 @@ function Footer() {
         <div className="md:col-span-4">
           <p className="eyebrow text-champagne mb-5">Follow the Stories</p>
           <div className="flex gap-3">
-            {[
-              { I: Instagram, h: "https://instagram.com" },
-              { I: Facebook, h: "https://facebook.com" },
-              { I: Youtube, h: "https://youtube.com" },
-            ].map(({ I, h }, i) => (
+            {SOCIALS.map(({ icon: Icon, href, label }) => (
               <a
-                key={i}
-                href={h}
+                key={label}
+                href={href}
                 target="_blank"
                 rel="noreferrer"
+                aria-label={label}
                 className="size-11 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-olive hover:border-olive transition-colors"
               >
-                <I className="size-4" strokeWidth={1.4} />
+                <Icon className="size-4" strokeWidth={1.4} />
               </a>
             ))}
           </div>
-          <p className="mt-8 text-xs text-ivory/50 leading-relaxed">
-            Studio by appointment.
-            <br /> Mumbai · Pan India · Destinations Worldwide.
-          </p>
+          <div className="mt-8 overflow-hidden rounded-sm border border-ivory/15 bg-ivory/5">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1890.5970662561638!2d73.819954!3d18.610336!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c75553a089db%3A0x3cdcb146f9aad2c5!2siFilms%20Media%20Productions%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1782292811854!5m2!1sen!2sin"
+              title="iFilms Media Productions location"
+              className="h-44 w-full"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
         </div>
       </div>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 mt-14 pt-6 border-t border-ivory/10 flex flex-col md:flex-row md:items-center justify-between gap-3 text-[0.7rem] tracking-[0.25em] uppercase text-ivory/40">
@@ -844,30 +1486,44 @@ function WhatsAppFab() {
       href={WA_LINK}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-6 right-6 z-50 group flex items-center gap-3 bg-[#25D366] text-white pl-4 pr-5 py-3 rounded-full shadow-2xl hover:shadow-[0_20px_50px_-10px_rgba(37,211,102,0.6)] transition-all hover:-translate-y-0.5"
+      aria-label="Chat with us on WhatsApp"
+      className="fixed bottom-6 right-6 z-50 group flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_45px_-12px_rgba(37,211,102,0.6)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-[0_24px_60px_-12px_rgba(37,211,102,0.72)]"
     >
-      <span className="relative">
-        <span className="absolute inset-0 rounded-full bg-white/40 animate-ping" />
-        <MessageCircle className="size-5 relative" />
+      <span className="relative flex items-center justify-center">
+        <span className="absolute inset-0 rounded-full bg-white/35 animate-ping" />
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          className="relative size-[1.55rem] fill-current"
+        >
+          <path d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.52 0 .18 5.34.18 11.9c0 2.1.55 4.14 1.6 5.94L0 24l6.36-1.67a11.9 11.9 0 0 0 5.7 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.47-8.4Zm-8.45 18.3h-.01a9.93 9.93 0 0 1-5.06-1.39l-.36-.21-3.77.99 1-3.68-.24-.38a9.9 9.9 0 0 1-1.52-5.28c0-5.47 4.45-9.92 9.93-9.92 2.65 0 5.13 1.03 7 2.91a9.84 9.84 0 0 1 2.9 7c0 5.47-4.45 9.92-9.92 9.92Zm5.44-7.42c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z" />
+        </svg>
       </span>
-      <span className="text-xs tracking-[0.25em] uppercase">Chat With Us</span>
+      <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-full bg-ink px-4 py-2 text-[0.65rem] uppercase tracking-[0.28em] text-ivory opacity-0 shadow-lg transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+        WhatsApp Us
+      </span>
     </a>
   );
 }
 
 export default function App() {
+  const appRef = useRef<HTMLElement | null>(null);
+  const [selectedService, setSelectedService] = useState<ServiceTitle | "">("");
+  useNumeralFont(appRef);
+
   return (
-    <main className="bg-ivory text-ink">
+    <main ref={appRef} className="bg-ivory text-ink">
       <Hero />
       <About />
-      <Services />
+      <Services onSelectService={setSelectedService} selectedService={selectedService} />
       <Experience />
       <Trust />
       <Portfolio />
       <Testimonials />
-      <ContactAndFaq />
+      <ContactAndFaq selectedService={selectedService} onSelectService={setSelectedService} />
       <Footer />
       <WhatsAppFab />
     </main>
   );
 }
+

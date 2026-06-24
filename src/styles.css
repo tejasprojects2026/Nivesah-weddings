@@ -38,6 +38,7 @@
   --color-ink: var(--ink);
 
   --font-display: "Cormorant Garamond", serif;
+  --font-numerals: "Prata", serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
@@ -92,6 +93,12 @@
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.01em;
+  }
+  .font-numerals {
+    font-family: var(--font-numerals);
+    font-weight: 400;
+    font-feature-settings: "lnum", "tnum";
+    letter-spacing: 0.01em;
   }
 }
 
