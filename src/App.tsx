@@ -39,6 +39,8 @@ import insta5 from "@/assets/instagram/insta-5.jpg";
 import insta6 from "@/assets/instagram/insta-6.jpg";
 import insta7 from "@/assets/instagram/insta-7.jpg";
 import insta8 from "@/assets/instagram/insta-8.jpg";
+import insta9 from "@/assets/instagram/insta-9.jpg";
+import insta10 from "@/assets/instagram/insta-10.jpg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 const WHATSAPP = "918446752571";
 const PHONE_DISPLAY = "+91 8446752571";
@@ -809,15 +811,6 @@ function About() {
               />
             ))}
           </div>
-          <div className="absolute -left-6 top-10 hidden md:flex flex-col items-center gap-2 text-olive">
-            <span className="h-24 w-px bg-olive/50" />
-            <span
-              className="text-[0.6rem] tracking-[0.4em] uppercase"
-              style={{ writingMode: "vertical-rl" }}
-            >
-              Est. 2017 Â· Mumbai
-            </span>
-          </div>
         </div>
 
         <div className="lg:col-span-6" data-reveal>
@@ -1014,49 +1007,49 @@ const SERVICES = [
   {
     icon: Camera,
     title: "Wedding Photography",
-    desc: "Editorial portraits, candid moments and timeless frames.",
+    desc: "Editorial portraits and candid frames.",
     image: insta1,
   },
   {
     icon: Film,
     title: "Cinematography",
-    desc: "Feature-style wedding films with cinematic grading.",
+    desc: "Feature-style films with cinematic grading.",
     image: insta3,
   },
   {
     icon: Heart,
     title: "Pre-Wedding Shoots",
-    desc: "Intimate love stories told across breathtaking locations.",
+    desc: "Intimate love stories across beautiful locations.",
     image: insta4,
   },
   {
     icon: Aperture,
     title: "Candid Photography",
-    desc: "Honest emotion, captured between the planned moments.",
+    desc: "Honest emotion between planned moments.",
     image: insta2,
   },
   {
     icon: Sparkles,
     title: "Wedding Films",
-    desc: "Trailers, highlight reels and full ceremonial films.",
+    desc: "Trailers, reels and ceremonial films.",
     image: insta5,
   },
   {
     icon: BookOpen,
     title: "Luxury Albums",
-    desc: "Hand-bound, archival heirloom albums in fine materials.",
+    desc: "Hand-bound archival heirloom albums.",
     image: insta6,
   },
   {
     icon: Scissors,
     title: "Professional Editing",
-    desc: "Color, sound and story crafted in our private studio.",
-    image: insta7,
+    desc: "Color, sound and story refinement.",
+    image: insta10,
   },
   {
     icon: CalendarCheck,
     title: "Event Planning",
-    desc: "Coordinated execution so your day flows effortlessly.",
+    desc: "Coordinated execution for a seamless day.",
     image: insta8,
   },
 ];
@@ -1085,10 +1078,7 @@ function Services({
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(247,242,233,0.9),rgba(247,242,233,0.95))]" />
       </div>
       <div className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-10">
-        <div
-          className="relative mb-8 flex flex-col gap-4 md:mb-10 md:flex-row md:items-end md:justify-between md:gap-6"
-          data-reveal
-        >
+        <div className="relative mb-8 md:mb-10" data-reveal>
           <div>
             <div className="flex items-center gap-4 mb-6">
               <span className="hairline" />
@@ -1100,23 +1090,18 @@ function Services({
               Delivered with poise.
             </h2>
           </div>
-          <p className="md:max-w-sm text-foreground/70 font-light leading-relaxed">
-            A complete creative atelier for couples who want their wedding remembered like a film â€”
-            and presented like a magazine.
-          </p>
         </div>
 
         <div
-          className="relative mb-8 flex flex-col items-start gap-3 border border-olive/15 bg-ivory/70 px-4 py-4 text-sm text-foreground/75 backdrop-blur-sm sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-6"
+          className="relative mb-8 flex flex-col items-start gap-3 border border-olive/15 bg-ivory/70 px-4 py-4 text-sm text-foreground/75 backdrop-blur-sm sm:mb-10 sm:flex-row sm:items-center sm:gap-4 sm:px-6"
           data-reveal
         >
           <div className="flex items-center gap-3 text-olive">
             <MapPin className="size-4" />
             <span className="eyebrow text-olive">Pan India Coverage</span>
           </div>
-          <p className="max-w-2xl font-light leading-relaxed">
-            From intimate hometown ceremonies to destination celebrations, our team is available
-            for weddings across India with photography, films, albums, and planning support.
+          <p className="font-light leading-relaxed">
+            Available across India for photography, films, albums, and planning.
           </p>
         </div>
 
@@ -2066,12 +2051,20 @@ function Footer() {
             A boutique atelier preserving wedding stories with dedication, precision and a personal
             approach.
           </p>
-          <a
-            href={`tel:${WHATSAPP}`}
-            className="mt-8 inline-flex items-center gap-3 font-display text-xl text-champagne transition-colors hover:text-ivory sm:text-2xl"
-          >
-            <Phone className="size-5" /> {PHONE_DISPLAY}
-          </a>
+          <div className="mt-8 flex flex-col items-start gap-4">
+            <a
+              href={`tel:${WHATSAPP}`}
+              className="inline-flex items-center gap-3 font-display text-xl text-champagne transition-colors hover:text-ivory sm:text-2xl"
+            >
+              <Phone className="size-5" /> {PHONE_DISPLAY}
+            </a>
+            <a
+              href="mailto:connect@nivesahweddings.in"
+              className="text-xs tracking-[0.12em] text-ivory/70 transition-colors hover:text-champagne sm:text-sm"
+            >
+              connect@nivesahweddings.in
+            </a>
+          </div>
         </div>
         <div className="md:col-span-3">
           <p className="eyebrow text-champagne mb-5">Explore</p>
@@ -2116,7 +2109,6 @@ function Footer() {
       </div>
       <div className="mx-auto mt-12 flex max-w-[1400px] flex-col gap-3 border-t border-ivory/10 px-5 pt-6 text-[0.65rem] uppercase tracking-[0.22em] text-ivory/40 sm:px-6 md:mt-14 md:flex-row md:items-center md:justify-between lg:px-10">
         <p>© {new Date().getFullYear()} iFilms Media Productions Pvt. Ltd. All rights reserved.</p>
-        <p>Crafted with devotion.</p>
       </div>
     </footer>
   );
