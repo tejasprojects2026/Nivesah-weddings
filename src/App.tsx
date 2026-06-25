@@ -52,7 +52,7 @@ const WA_LINK = `https://wa.me/${WHATSAPP}?text=${WA_MSG}`;
 const INSTAGRAM_URL = "https://www.instagram.com/nivesahweddings/";
 const SOCIALS = [
   { icon: Instagram, href: INSTAGRAM_URL, label: "Instagram" },
-  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+  { icon: Facebook, href: "https://www.facebook.com/nivesahweddings/", label: "Facebook" },
   { icon: Youtube, href: YOUTUBE_CHANNEL_URL, label: "YouTube" },
 ] as const;
 
