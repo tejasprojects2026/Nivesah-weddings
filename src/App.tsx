@@ -537,27 +537,21 @@ function Hero() {
 
       <Nav />
 
-      <div className="relative z-10 flex min-h-[100svh] items-center">
-        <div className="mx-auto grid w-full max-w-[1400px] gap-10 px-5 pt-28 pb-24 sm:px-6 lg:grid-cols-12 lg:px-10 lg:pt-32 lg:pb-20">
-          <div className="lg:col-span-8 text-ivory animate-reveal">
-            <div className="flex items-center gap-4 mb-8">
+      <div className="relative z-10 flex min-h-[100svh] items-end sm:items-center">
+        <div className="mx-auto grid w-full max-w-[1400px] gap-10 px-5 pt-28 pb-14 sm:px-6 sm:pb-24 lg:grid-cols-12 lg:px-10 lg:pt-32 lg:pb-20">
+          <div className="text-ivory animate-reveal lg:col-span-8">
+            <div className="mb-6 hidden items-center gap-4 sm:flex sm:mb-8">
               <span className="hairline bg-champagne" />
               <span className="eyebrow text-champagne">Nivesah Weddings</span>
-            </div>
-            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-champagne/35 bg-ivory/10 px-4 py-2 text-[0.65rem] tracking-[0.22em] uppercase text-champagne/95 backdrop-blur-sm sm:text-[0.7rem] sm:tracking-[0.28em]">
-              <MapPin className="size-3.5" />
-              Pan India Wedding Services
             </div>
             <h1 className="mt-6 font-display text-[clamp(2.35rem,10vw,7.5rem)] leading-[0.95] tracking-tight">
               Your Wedding,
               <br />
               <span className="italic text-champagne">Told</span> Like Cinema
             </h1>
-            <p className="mt-6 max-w-xl text-sm text-ivory/85 leading-relaxed font-light sm:mt-8 sm:text-base lg:text-lg">
-              We help you turn your special day into unforgettable memories to be treasured for a
-              lifetime. Every wedding has its own unique narrative â€” and Nivesah Weddings ensures
-              it is captured in the most delightful manner, wherever your celebration takes place
-              across India.
+            <p className="mt-5 max-w-[34ch] text-[0.92rem] text-ivory/85 leading-relaxed font-light sm:mt-8 sm:max-w-xl sm:text-base lg:text-lg">
+              We turn your wedding into timeless memories, captured with warmth, beauty, and a
+              cinematic eye wherever your celebration takes place across India.
             </p>
             <div className="mt-8 flex flex-col items-start gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
               <a
@@ -571,7 +565,7 @@ function Hero() {
               </a>
               <a
                 href={`tel:${WHATSAPP}`}
-                className="flex flex-wrap items-center gap-3 text-sm text-ivory/90 transition-colors sm:pl-2 hover:text-champagne"
+                className="hidden flex-wrap items-center gap-3 text-sm text-ivory/90 transition-colors sm:flex sm:pl-2 hover:text-champagne"
               >
                 <Phone className="size-4" />
                 <span className="tracking-[0.16em] sm:tracking-[0.2em]">{PHONE_DISPLAY}</span>
@@ -2189,14 +2183,10 @@ function HeroBanner() {
           </div>
 
           <div className="relative z-10 mx-auto flex min-h-[76svh] max-w-[1120px] flex-col items-center justify-end pb-24 text-center text-ivory sm:min-h-[82svh] lg:min-h-[78svh] lg:pb-28">
-            <div className="mb-6 flex items-center gap-4">
+            <div className="mb-6 hidden items-center gap-4 sm:flex">
               <span className="hairline bg-ivory/60" />
               <span className="eyebrow text-ivory/90">Nivesah Weddings</span>
               <span className="hairline bg-ivory/60" />
-            </div>
-            <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/35 bg-white/12 px-4 py-2 text-[0.65rem] tracking-[0.22em] uppercase text-ivory/95 backdrop-blur-sm sm:text-[0.7rem] sm:tracking-[0.28em]">
-              <MapPin className="size-3.5" />
-              Pan India Wedding Services
             </div>
             <h1 className="mt-6 max-w-5xl font-display text-[clamp(2.3rem,6vw,5.45rem)] leading-[0.94] tracking-[-0.02em]">
               Your Wedding,
@@ -2205,7 +2195,7 @@ function HeroBanner() {
             </h1>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed font-light text-ivory/88 sm:mt-6 sm:text-base lg:max-w-3xl lg:text-lg">
               We help you turn your special day into unforgettable memories to be treasured for a
-              lifetime. Every wedding has its own unique narrative Ã¢â‚¬â€ and Nivesah Weddings ensures
+              lifetime. Every wedding has its own unique narrative, and Nivesah Weddings ensures
               it is captured in the most delightful manner, wherever your celebration takes place
               across India.
             </p>
@@ -2224,7 +2214,7 @@ function HeroBanner() {
               </a>
               <a
                 href={`tel:${WHATSAPP}`}
-                className="flex flex-wrap items-center justify-center gap-3 text-sm text-ivory/95 transition-colors hover:text-champagne"
+                className="hidden flex-wrap items-center justify-center gap-3 text-sm text-ivory/95 transition-colors sm:flex hover:text-champagne"
               >
                 <Phone className="size-4" />
                 <span className="tracking-[0.16em] sm:tracking-[0.2em]">{PHONE_DISPLAY}</span>
