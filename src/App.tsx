@@ -542,7 +542,7 @@ function Hero() {
           <div className="lg:col-span-8 text-ivory animate-reveal">
             <div className="flex items-center gap-4 mb-8">
               <span className="hairline bg-champagne" />
-              <span className="eyebrow text-champagne">Nivesah Â· iFilms Media</span>
+              <span className="eyebrow text-champagne">Nivesah Weddings</span>
             </div>
             <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-champagne/35 bg-ivory/10 px-4 py-2 text-[0.65rem] tracking-[0.22em] uppercase text-champagne/95 backdrop-blur-sm sm:text-[0.7rem] sm:tracking-[0.28em]">
               <MapPin className="size-3.5" />
@@ -2191,7 +2191,7 @@ function HeroBanner() {
           <div className="relative z-10 mx-auto flex min-h-[76svh] max-w-[1120px] flex-col items-center justify-end pb-24 text-center text-ivory sm:min-h-[82svh] lg:min-h-[78svh] lg:pb-28">
             <div className="mb-6 flex items-center gap-4">
               <span className="hairline bg-ivory/60" />
-              <span className="eyebrow text-ivory/90">Nivesah Ã‚Â· iFilms Media</span>
+              <span className="eyebrow text-ivory/90">Nivesah Weddings</span>
               <span className="hairline bg-ivory/60" />
             </div>
             <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/35 bg-white/12 px-4 py-2 text-[0.65rem] tracking-[0.22em] uppercase text-ivory/95 backdrop-blur-sm sm:text-[0.7rem] sm:tracking-[0.28em]">
