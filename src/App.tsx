@@ -43,7 +43,7 @@ import insta9 from "@/assets/instagram/insta-9.jpg";
 import insta10 from "@/assets/instagram/insta-10.jpg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 const WHATSAPP = "918446752571";
-const PHONE_DISPLAY = "+91 8446752571";
+const PHONE_DISPLAY = "84467 52571";
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@nivesahweddings3728";
 const YOUTUBE_CHANNEL_ID = "UCyQPjkbkF8GfzyXDfR8hnwg";
 const YOUTUBE_UPLOADS_PLAYLIST_ID = `UU${YOUTUBE_CHANNEL_ID.slice(2)}`;
@@ -173,13 +173,6 @@ const YOUTUBE_FEATURED_VIDEOS = [
     note: "A wedding highlight film built around movement, ceremony details, and atmosphere.",
     label: "Signature Reel",
     location: "Wedding Highlight",
-  },
-  {
-    id: "hyU2EEGnlh0",
-    title: "Pratik & Disha Engagement Teaser",
-    note: "A fast, romantic teaser with modern pacing and stylish pre-wedding framing.",
-    label: "Highlights",
-    location: "Modern Teaser",
   },
 ] as const;
 
@@ -565,13 +558,13 @@ function Hero() {
               <a href="#portfolio" className="btn-ghost w-full sm:w-auto">
                 View Films
               </a>
-              <a
-                href={`tel:${WHATSAPP}`}
-                className="hidden flex-wrap items-center gap-3 text-sm text-ivory/90 transition-colors sm:flex sm:pl-2 hover:text-champagne"
-              >
-                <Phone className="size-4" />
-                <span className="tracking-[0.16em] sm:tracking-[0.2em]">{PHONE_DISPLAY}</span>
-              </a>
+            <a
+              href={`tel:${WHATSAPP}`}
+              className="hidden flex-wrap items-center gap-3 text-sm text-ivory/90 transition-colors sm:flex sm:pl-2 hover:text-champagne"
+            >
+              <Phone className="size-4" />
+              <span className="tracking-[0.3em] sm:tracking-[0.38em]">{PHONE_DISPLAY}</span>
+            </a>
             </div>
           </div>
 
@@ -615,12 +608,6 @@ function Hero() {
           </div>
         </div>
 
-        <div className="absolute bottom-6 inset-x-0 hidden justify-center text-ivory/70 text-[0.65rem] tracking-[0.4em] uppercase sm:flex">
-          <span className="flex items-center gap-3">
-            <span className="hairline bg-ivory/40" /> Scroll{" "}
-            <span className="hairline bg-ivory/40" />
-          </span>
-        </div>
       </div>
     </section>
   );
@@ -883,14 +870,6 @@ function InstagramShowcase() {
               Real moments, pulled from <em className="text-olive">@nivesahweddings</em>.
             </h2>
           </div>
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 self-start border border-olive/20 bg-white/60 px-5 py-3 text-[0.72rem] uppercase tracking-[0.3em] text-olive transition-all hover:border-olive hover:bg-olive hover:text-ivory"
-          >
-            Open Profile <ArrowUpRight className="size-4" />
-          </a>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[1.3fr_minmax(220px,0.52fr)] lg:gap-6" data-reveal>
@@ -1062,13 +1041,14 @@ function Services({
   selectedService: ServiceTitle | "";
 }) {
   const ref = useReveal();
+
   return (
     <section
       id="services"
       ref={ref}
       className="relative overflow-hidden bg-[oklch(0.97_0.012_80)] py-10 lg:py-16"
     >
-      <div className="absolute inset-0">
+      <div className="pointer-events-none absolute inset-0">
         <img
           src={about2}
           alt=""
@@ -1077,7 +1057,7 @@ function Services({
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(247,242,233,0.9),rgba(247,242,233,0.95))]" />
       </div>
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-10">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 sm:px-6 lg:px-10">
         <div className="relative mb-8 md:mb-10" data-reveal>
           <div>
             <div className="flex items-center gap-4 mb-6">
@@ -1105,13 +1085,14 @@ function Services({
           </p>
         </div>
 
-        <div className="relative grid gap-px bg-border/60 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
+        <div className="relative grid grid-cols-1 gap-px bg-border/60 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
           {SERVICES.map(({ icon: Icon, title, desc, image }, i) => (
             <button
               key={title}
               type="button"
               onClick={() => onSelectService(title)}
-              className={`group relative isolate overflow-hidden border border-white/35 bg-ivory/82 p-6 text-left backdrop-blur-[2px] transition-all duration-500 hover:bg-ivory/70 sm:p-8 lg:p-10 ${
+              aria-pressed={selectedService === title}
+              className={`group relative isolate min-h-[248px] overflow-hidden border border-white/35 bg-ivory/82 p-6 text-left backdrop-blur-[2px] transition-all duration-500 active:bg-ivory/70 [touch-action:manipulation] sm:min-h-[290px] sm:p-8 lg:min-h-[340px] lg:p-10 md:hover:bg-ivory/70 ${
                 selectedService === title ? "ring-1 ring-olive/40" : ""
               }`}
             >
@@ -1120,28 +1101,31 @@ function Services({
                   src={image}
                   alt=""
                   aria-hidden="true"
-                  className="h-full w-full scale-110 object-cover opacity-0 transition-all duration-700 group-hover:scale-100 group-hover:opacity-100"
+                  className="h-full w-full scale-110 object-cover opacity-0 transition-all duration-700 md:group-hover:scale-100 md:group-hover:opacity-100"
                   loading="lazy"
                 />
               </div>
-              <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(248,242,233,0.96),rgba(244,237,226,0.94))] transition-all duration-700 group-hover:bg-[linear-gradient(180deg,rgba(248,242,233,0.22),rgba(244,237,226,0.12))]" />
-              <div className="absolute inset-0 -z-10 bg-olive/0 transition-colors duration-700 group-hover:bg-olive/5" />
-              <span className="absolute top-6 right-6 text-[0.65rem] tracking-[0.3em] text-olive/70 transition-all duration-500 group-hover:translate-y-2 group-hover:opacity-0">
+              <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(248,242,233,0.96),rgba(244,237,226,0.94))] transition-all duration-700 md:group-hover:bg-[linear-gradient(180deg,rgba(248,242,233,0.22),rgba(244,237,226,0.12))]" />
+              <div className="absolute inset-0 -z-10 bg-olive/0 transition-colors duration-700 md:group-hover:bg-olive/5" />
+              <span className="absolute right-5 top-5 text-[0.62rem] tracking-[0.28em] text-olive/70 transition-all duration-500 md:group-hover:translate-y-2 md:group-hover:opacity-0 sm:right-6 sm:top-6 sm:text-[0.65rem]">
                 / {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="relative size-14 rounded-full border border-olive/40 flex items-center justify-center mb-8 transition-all duration-500 group-hover:translate-y-3 group-hover:opacity-0">
+              <div className="relative mb-7 flex size-12 items-center justify-center rounded-full border border-olive/40 transition-all duration-500 md:group-hover:translate-y-3 md:group-hover:opacity-0 sm:mb-8 sm:size-14">
                 <Icon
-                  className="size-5 text-olive group-hover:text-ivory transition-colors"
+                  className="size-4 text-olive transition-colors md:group-hover:text-ivory sm:size-5"
                   strokeWidth={1.4}
                 />
               </div>
-              <h3 className="relative font-display text-2xl leading-snug transition-all duration-500 group-hover:translate-y-4 group-hover:opacity-0">
+              <h3 className="relative pr-10 font-display text-[1.85rem] leading-[1.1] transition-all duration-500 md:group-hover:translate-y-4 md:group-hover:opacity-0 sm:pr-12 sm:text-2xl">
                 {title}
               </h3>
-              <p className="relative mt-3 text-sm text-foreground/70 leading-relaxed font-light transition-all duration-500 group-hover:translate-y-4 group-hover:opacity-0">
+              <p className="relative mt-3 max-w-[22rem] text-sm leading-relaxed text-foreground/70 transition-all duration-500 font-light md:group-hover:translate-y-4 md:group-hover:opacity-0">
                 {desc}
               </p>
-              <span className="relative block mt-6 h-px w-0 bg-olive transition-all duration-700 group-hover:w-full group-hover:opacity-0" />
+              <span className="relative mt-6 block h-px w-full bg-olive/35 transition-all duration-700 md:w-0 md:bg-olive md:group-hover:w-full md:group-hover:opacity-0" />
+              <span className="relative mt-5 inline-flex text-[0.62rem] uppercase tracking-[0.3em] text-olive/80 sm:hidden">
+                Tap to enquire
+              </span>
             </button>
           ))}
         </div>
@@ -1381,12 +1365,6 @@ function Portfolio() {
               A portfolio of <em className="text-olive">love,</em> light and legacy.
             </h2>
           </div>
-          <a
-            href="#contact"
-            className="self-start md:self-end inline-flex items-center gap-2 text-xs tracking-[0.3em] uppercase text-olive hover:gap-4 transition-all"
-          >
-            View Full Archive <ArrowUpRight className="size-4" />
-          </a>
         </div>
 
         <div
@@ -1522,14 +1500,6 @@ function YouTubeFeedSection() {
               Weddings channel.
             </p>
           </div>
-          <a
-            href={YOUTUBE_CHANNEL_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 self-start border border-champagne/35 px-4 py-3 text-xs uppercase tracking-[0.3em] text-champagne transition-all hover:gap-4 hover:bg-champagne hover:text-ink"
-          >
-            Visit Channel <ArrowUpRight className="size-4" />
-          </a>
         </div>
 
         <div className="relative grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_420px]" data-reveal>
@@ -1549,7 +1519,7 @@ function YouTubeFeedSection() {
                 </span>
               </div>
             </div>
-            <div className="aspect-video bg-black">
+            <div className="aspect-video">
               {isVideoPlaying ? (
                 <iframe
                   key={activeVideo.id + activeVideoIndex}
@@ -1569,9 +1539,9 @@ function YouTubeFeedSection() {
                   aria-label={`Play ${activeVideo.title}`}
                 >
                   <img
-                    src={`https://i.ytimg.com/vi/${activeVideo.id}/sddefault.jpg`}
+                    src={`https://i.ytimg.com/vi/${activeVideo.id}/maxresdefault.jpg`}
                     alt={activeVideo.title}
-                    className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                    className="h-full w-full object-cover object-top transition-transform duration-[1400ms] group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.45))]" />
@@ -1588,20 +1558,6 @@ function YouTubeFeedSection() {
                   </div>
                 </button>
               )}
-            </div>
-            <div className="grid gap-3 border-t border-white/10 bg-[#120f0c] px-5 py-5 sm:grid-cols-[1fr_auto] sm:px-6">
-              <p className="max-w-xl text-sm leading-relaxed text-ivory/68">
-                {activeVideo.note}. Watch this selection in full, or move through the curated cuts
-                on the right to explore the channel in a more cinematic way.
-              </p>
-              <a
-                href={`https://www.youtube.com/watch?v=${activeVideo.id}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 self-start text-xs uppercase tracking-[0.28em] text-champagne transition-all hover:gap-4"
-              >
-                Open on YouTube <ArrowUpRight className="size-3.5" />
-              </a>
             </div>
           </div>
 
@@ -1622,9 +1578,9 @@ function YouTubeFeedSection() {
                   <div className="grid min-h-[168px] grid-cols-[92px_1fr] sm:min-h-[190px]">
                     <div className="relative overflow-hidden">
                       <img
-                        src={`https://i.ytimg.com/vi/${video.id}/mqdefault.jpg`}
+                        src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
                         alt={video.title}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-r from-ink/55 to-transparent" />
@@ -2056,7 +2012,8 @@ function Footer() {
               href={`tel:${WHATSAPP}`}
               className="inline-flex items-center gap-3 font-display text-xl text-champagne transition-colors hover:text-ivory sm:text-2xl"
             >
-              <Phone className="size-5" /> {PHONE_DISPLAY}
+              <Phone className="size-5" />
+              <span className="tracking-[0.28em] sm:tracking-[0.36em]">{PHONE_DISPLAY}</span>
             </a>
             <a
               href="mailto:connect@nivesahweddings.in"
@@ -2107,8 +2064,10 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-12 flex max-w-[1400px] flex-col gap-3 border-t border-ivory/10 px-5 pt-6 text-[0.65rem] uppercase tracking-[0.22em] text-ivory/40 sm:px-6 md:mt-14 md:flex-row md:items-center md:justify-between lg:px-10">
-        <p>© {new Date().getFullYear()} iFilms Media Productions Pvt. Ltd. All rights reserved.</p>
+      <div className="mx-auto mt-12 flex max-w-[1400px] flex-col gap-3 border-t border-ivory/10 px-5 pt-6 sm:px-6 md:mt-14 md:flex-row md:items-center md:justify-between lg:px-10">
+        <p className="font-sans text-[0.7rem] font-medium leading-none uppercase tracking-[0.3em] text-ivory/38">
+          © {new Date().getFullYear()} iFilms Media Productions Pvt. Ltd. All rights reserved.
+        </p>
       </div>
     </footer>
   );
@@ -2209,7 +2168,7 @@ function HeroBanner() {
                 className="hidden flex-wrap items-center justify-center gap-3 text-sm text-ivory/95 transition-colors sm:flex hover:text-champagne"
               >
                 <Phone className="size-4" />
-                <span className="tracking-[0.16em] sm:tracking-[0.2em]">{PHONE_DISPLAY}</span>
+                <span className="tracking-[0.3em] sm:tracking-[0.38em]">{PHONE_DISPLAY}</span>
               </a>
             </div>
           </div>
