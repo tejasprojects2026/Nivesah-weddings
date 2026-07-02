@@ -20,39 +20,27 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-import hero from "@/assets/DSC04417.jpg";
-import rings from "@/assets/PSC02898.jpg";
-import about1 from "@/assets/DSC07684_edit.jpg";
-import about2 from "@/assets/DSC04547.jpg";
+import hero from "@/assets/hero.jpg";
+import rings from "@/assets/rings.jpg";
+import about1 from "@/assets/about1.jpg";
+import about2 from "@/assets/about2.jpg";
 import nivesahLogo from "@/assets/Nivesah 4K-3.png";
-import p1 from "@/assets/portfolio/aanya-vihaan/DSC04090-1.jpg";
-import p1Alt1 from "@/assets/portfolio/aanya-vihaan/DSC04072-1.jpg";
-import p1Alt2 from "@/assets/portfolio/aanya-vihaan/DSC04112.jpg";
-import p2 from "@/assets/portfolio/riya-arjun/PSC07522.jpg";
-import p2Alt1 from "@/assets/portfolio/riya-arjun/PSC07518.jpg";
-import p2Alt2 from "@/assets/portfolio/riya-arjun/PSC07533.jpg";
-import p3 from "@/assets/portfolio/meera-kabir/DSC07912_edit.jpg";
-import p3Alt1 from "@/assets/portfolio/meera-kabir/DSC07934.jpg";
-import p3Alt2 from "@/assets/portfolio/meera-kabir/DSC07974_edit.jpg";
-import p4 from "@/assets/portfolio/saanvi-ishaan/SMC04386-01.jpg";
-import p4Alt1 from "@/assets/portfolio/saanvi-ishaan/SMC04709.jpg";
-import p4Alt2 from "@/assets/portfolio/saanvi-ishaan/SMC05005 (1).jpg";
-import p5 from "@/assets/portfolio/naina-veer/DSC04417.jpg";
-import p5Alt1 from "@/assets/portfolio/naina-veer/DSC04426.jpg";
-import p5Alt2 from "@/assets/portfolio/naina-veer/DSC04430.jpg";
-import p6 from "@/assets/portfolio/anushka-aarav/PSC02898.jpg";
-import p6Alt1 from "@/assets/portfolio/anushka-aarav/PSC02985.jpg";
-import p6Alt2 from "@/assets/portfolio/anushka-aarav/PSC03073.jpg";
-import insta1 from "@/assets/DSC04417.jpg";
-import insta2 from "@/assets/DSC04547.jpg";
-import insta3 from "@/assets/PSC02898.jpg";
-import insta4 from "@/assets/DSC07684_edit.jpg";
-import insta5 from "@/assets/DSC07912_edit.jpg";
-import insta6 from "@/assets/SMC04386-01.jpg";
-import insta7 from "@/assets/PSC07522.jpg";
-import insta8 from "@/assets/DSC04090-1.jpg";
-import insta9 from "@/assets/DSC04417.jpg";
-import insta10 from "@/assets/DSC04547.jpg";
+import p1 from "@/assets/p1.jpg";
+import p2 from "@/assets/p2.jpg";
+import p3 from "@/assets/p3.jpg";
+import p4 from "@/assets/p4.jpg";
+import p5 from "@/assets/p5.jpg";
+import p6 from "@/assets/p6.jpg";
+import insta1 from "@/assets/instagram/insta-1.jpg";
+import insta2 from "@/assets/instagram/insta-2.jpg";
+import insta3 from "@/assets/instagram/insta-3.jpg";
+import insta4 from "@/assets/instagram/insta-4.jpg";
+import insta5 from "@/assets/instagram/insta-5.jpg";
+import insta6 from "@/assets/instagram/insta-6.jpg";
+import insta7 from "@/assets/instagram/insta-7.jpg";
+import insta8 from "@/assets/instagram/insta-8.jpg";
+import insta9 from "@/assets/instagram/insta-9.jpg";
+import insta10 from "@/assets/instagram/insta-10.jpg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 const WHATSAPP = "918446752571";
 const PHONE_DISPLAY = "84467 52571";
@@ -1312,42 +1300,42 @@ const PORTFOLIO = [
     couple: "Aanya & Vihaan",
     loc: "Udaipur, Rajasthan",
     h: "sm:row-span-2",
-    gallery: [p1, p1Alt1, p1Alt2],
+    gallery: [p1, about1, p6],
   },
   {
     img: p2,
     couple: "Riya & Arjun",
     loc: "Pune, Maharashtra",
     h: "",
-    gallery: [p2, p2Alt1, p2Alt2],
+    gallery: [p2, about2, p1],
   },
   {
     img: p3,
     couple: "Meera & Kabir",
     loc: "Jaipur Palace",
     h: "",
-    gallery: [p3, p3Alt1, p3Alt2],
+    gallery: [p3, p5, about2],
   },
   {
     img: p4,
     couple: "Saanvi & Ishaan",
     loc: "Goa Coastline",
     h: "sm:row-span-2",
-    gallery: [p4, p4Alt1, p4Alt2],
+    gallery: [p4, p6, about1],
   },
   {
     img: p5,
     couple: "Naina & Veer",
     loc: "Mumbai Heritage",
     h: "",
-    gallery: [p5, p5Alt1, p5Alt2],
+    gallery: [p5, p3, p2],
   },
   {
     img: p6,
     couple: "Anushka & Aarav",
     loc: "Delhi Reception",
     h: "",
-    gallery: [p6, p6Alt1, p6Alt2],
+    gallery: [p6, p4, p1],
   },
 ];
 
