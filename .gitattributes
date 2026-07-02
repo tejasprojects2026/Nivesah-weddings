@@ -1,32 +1,5 @@
-*.dng filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.JPG filter=lfs diff=lfs merge=lfs -text
-src/assets/DSC04417.jpg -filter -diff -merge text
-src/assets/PSC02898.jpg -filter -diff -merge text
-src/assets/DSC07684_edit.jpg -filter -diff -merge text
-src/assets/DSC04547.jpg -filter -diff -merge text
-src/assets/Nivesah 4K-3.png -filter -diff -merge text
-src/assets/DSC07912_edit.jpg -filter -diff -merge text
-src/assets/SMC04386-01.jpg -filter -diff -merge text
-src/assets/PSC07522.jpg -filter -diff -merge text
-src/assets/DSC04090-1.jpg -filter -diff -merge text
-src/assets/portfolio/aanya-vihaan/DSC04090-1.jpg -filter -diff -merge text
-src/assets/portfolio/aanya-vihaan/DSC04072-1.jpg -filter -diff -merge text
-src/assets/portfolio/aanya-vihaan/DSC04112.jpg -filter -diff -merge text
-src/assets/portfolio/riya-arjun/PSC07522.jpg -filter -diff -merge text
-src/assets/portfolio/riya-arjun/PSC07518.jpg -filter -diff -merge text
-src/assets/portfolio/riya-arjun/PSC07533.jpg -filter -diff -merge text
-src/assets/portfolio/meera-kabir/DSC07912_edit.jpg -filter -diff -merge text
-src/assets/portfolio/meera-kabir/DSC07934.jpg -filter -diff -merge text
-src/assets/portfolio/meera-kabir/DSC07974_edit.jpg -filter -diff -merge text
-src/assets/portfolio/saanvi-ishaan/SMC04386-01.jpg -filter -diff -merge text
-src/assets/portfolio/saanvi-ishaan/SMC04709.jpg -filter -diff -merge text
-"src/assets/portfolio/saanvi-ishaan/SMC05005 (1).jpg" -filter -diff -merge text
-src/assets/portfolio/naina-veer/DSC04417.jpg -filter -diff -merge text
-src/assets/portfolio/naina-veer/DSC04426.jpg -filter -diff -merge text
-src/assets/portfolio/naina-veer/DSC04430.jpg -filter -diff -merge text
-src/assets/portfolio/anushka-aarav/PSC02898.jpg -filter -diff -merge text
-src/assets/portfolio/anushka-aarav/PSC02985.jpg -filter -diff -merge text
-src/assets/portfolio/anushka-aarav/PSC03073.jpg -filter -diff -merge text
+src/assets/DSC01846.dng filter=lfs diff=lfs merge=lfs -text
+src/assets/PPP07785.dng filter=lfs diff=lfs merge=lfs -text
+src/assets/PPP07871.dng filter=lfs diff=lfs merge=lfs -text
+src/assets/PSC07098.dng filter=lfs diff=lfs merge=lfs -text
+src/assets/PSC07522.dng filter=lfs diff=lfs merge=lfs -text
