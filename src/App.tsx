@@ -21,9 +21,13 @@ import {
 } from "lucide-react";
 
 import hero from "@/assets/DSC04417.jpg";
-import rings from "@/assets/PSC02898.jpg";
+import rings from "@/assets/DSC01013.JPG";
 import about1 from "@/assets/DSC07684_edit.jpg";
 import about2 from "@/assets/DSC04547.jpg";
+import about3 from "@/assets/PSC09222.jpg";
+import about4 from "@/assets/SMC02978.jpg";
+import about5 from "@/assets/PSC09365.jpg";
+import about6 from "@/assets/DSC03904.jpg";
 import nivesahLogo from "@/assets/Nivesah 4K-3.png";
 import p1 from "@/assets/portfolio/aanya-vihaan/DSC04090-1.jpg";
 import p1Alt1 from "@/assets/portfolio/aanya-vihaan/DSC04072-1.jpg";
@@ -43,16 +47,16 @@ import p5Alt2 from "@/assets/portfolio/naina-veer/DSC04430.jpg";
 import p6 from "@/assets/portfolio/anushka-aarav/PSC02898.jpg";
 import p6Alt1 from "@/assets/portfolio/anushka-aarav/PSC02985.jpg";
 import p6Alt2 from "@/assets/portfolio/anushka-aarav/PSC03073.jpg";
-import insta1 from "@/assets/DSC04417.jpg";
-import insta2 from "@/assets/DSC04547.jpg";
-import insta3 from "@/assets/PSC02898.jpg";
-import insta4 from "@/assets/DSC07684_edit.jpg";
-import insta5 from "@/assets/DSC07912_edit.jpg";
-import insta6 from "@/assets/SMC04386-01.jpg";
-import insta7 from "@/assets/PSC07522.jpg";
-import insta8 from "@/assets/DSC04090-1.jpg";
-import insta9 from "@/assets/DSC04417.jpg";
-import insta10 from "@/assets/DSC04547.jpg";
+import insta1 from "@/assets/PSC09943.jpg";
+import insta2 from "@/assets/DSC09821_edit.jpg";
+import insta3 from "@/assets/SMC08424 (2).jpg";
+import insta4 from "@/assets/PSC02421.jpg";
+import insta5 from "@/assets/DSC05742.jpg";
+import insta6 from "@/assets/PSC09770.jpg";
+import insta7 from "@/assets/DSC07010.jpg";
+import insta8 from "@/assets/SMC02963.jpg";
+import insta9 from "@/assets/PSC06606 (1).jpg";
+import insta10 from "@/assets/DSC03859.jpg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 const WHATSAPP = "918446752571";
 const PHONE_DISPLAY = "84467 52571";
@@ -60,7 +64,7 @@ const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@nivesahweddings3728";
 const YOUTUBE_CHANNEL_ID = "UCyQPjkbkF8GfzyXDfR8hnwg";
 const YOUTUBE_UPLOADS_PLAYLIST_ID = `UU${YOUTUBE_CHANNEL_ID.slice(2)}`;
 const WA_MSG = encodeURIComponent(
-  "Hello Nivesah Weddings,\n\nI would like to enquire about wedding services.\n\nName:\nWedding Date:\nLocation:\nService Required:\n\nPlease share package details.",
+  "Hello Nivesah Weddings,\n\nI would like to enquire about event coverage.\n\nName:\nEvent Date:\nLocation:\nService Required:\n\nPlease share package details.",
 );
 const WA_LINK = `https://wa.me/${WHATSAPP}?text=${WA_MSG}`;
 const INSTAGRAM_URL = "https://www.instagram.com/nivesahweddings/";
@@ -76,40 +80,36 @@ const INSTAGRAM_SHOWCASE = [
     href: "https://www.instagram.com/p/DZ7hpg1CIvP/",
     image: insta1,
     label: "Feature Post",
-    title: "Two hearts. One promise. Endless memories.",
+    title: "A promise framed in light.",
     caption:
       "Capturing the beautiful moments of a Sakharpuda filled with love, laughter, and the excitement of forever.",
-    meta: "382 likes",
   },
   {
     shortcode: "DZ4utliIDnh",
     href: "https://www.instagram.com/p/DZ4utliIDnh/",
     image: insta2,
     label: "Booking Update",
-    title: "Forever starts with a single date.",
+    title: "Save the date, hold the feeling.",
     caption:
       "Wedding slots are filling fast. Secure yours and let the story be captured beautifully from the beginning.",
-    meta: "16 likes",
   },
   {
     shortcode: "DZZ5juRI66E",
     href: "https://www.instagram.com/reel/DZZ5juRI66E/",
     image: insta3,
     label: "Instagram Reel",
-    title: "And the story continues. Let's begin yours.",
+    title: "The story begins with one beautiful frame.",
     caption:
       "A cinematic reel built around movement, emotion, and the beginning of a new wedding story.",
-    meta: "350 likes",
   },
   {
     shortcode: "DY6gZL7iKsK",
     href: "https://www.instagram.com/p/DY6gZL7iKsK/",
     image: insta4,
     label: "Intimate Story",
-    title: "In the simplest moments, we found the beginning.",
+    title: "Soft moments. Lasting memories.",
     caption:
       "A quiet yes, a lifetime ahead, and an intimate celebration captured with a documentary softness.",
-    meta: "19 likes",
   },
 ] as const;
 
@@ -145,8 +145,8 @@ const ABOUT_CAROUSEL = [
     title: "Soft light, heirloom detail, and a story already unfolding.",
   },
   {
-    primary: p4,
-    secondary: p2,
+    primary: about3,
+    secondary: about4,
     altPrimary: "Bride and groom embracing outdoors",
     altSecondary: "Bride smiling during celebration",
     badge: "Destination Stories",
@@ -154,8 +154,8 @@ const ABOUT_CAROUSEL = [
     title: "Cinematic portraits that feel intimate, warm, and timeless.",
   },
   {
-    primary: p1,
-    secondary: p6,
+    primary: about5,
+    secondary: about6,
     altPrimary: "Couple portrait in formal wedding attire",
     altSecondary: "Wedding couple in a candid moment",
     badge: "Luxury Coverage",
@@ -585,7 +585,7 @@ function Hero() {
               <div className="relative">
                 <img
                   src={rings}
-                  alt="Wedding rings with roses"
+                    alt="Wedding couple portrait"
                   className="w-full h-[420px] object-cover"
                   width={800}
                   height={1024}
@@ -937,13 +937,13 @@ function InstagramShowcase() {
                   </a>
                 </div>
 
-                <div className="mt-8 grid grid-cols-2 gap-3 border-t border-border/70 pt-5 text-[0.68rem] uppercase tracking-[0.28em] text-foreground/55 sm:max-w-md">
-                  <div>
-                    <p className="text-foreground/45">Post Type</p>
-                    <p className="mt-2 text-olive">{activeStory.meta}</p>
-                  </div>
-                  <div>
-                    <p className="text-foreground/45">Source</p>
+                  <div className="mt-8 grid grid-cols-2 gap-3 border-t border-border/70 pt-5 text-[0.68rem] uppercase tracking-[0.28em] text-foreground/55 sm:max-w-md">
+                    <div>
+                      <p className="text-foreground/45">Post Type</p>
+                      <p className="mt-2 text-olive">{activeStory.label}</p>
+                    </div>
+                    <div>
+                      <p className="text-foreground/45">Source</p>
                     <p className="mt-2 text-olive">Instagram</p>
                   </div>
                 </div>
@@ -1743,8 +1743,8 @@ function ContactAndFaq({
     if (!/^\+?[0-9\s-]{10,15}$/.test(values.phone.trim())) {
       nextErrors.phone = "Please enter a valid phone number.";
     }
-    if (!values.date) nextErrors.date = "Please select your wedding date.";
-    if (!values.location.trim()) nextErrors.location = "Please enter your wedding location.";
+    if (!values.date) nextErrors.date = "Please select your event date.";
+    if (!values.location.trim()) nextErrors.location = "Please enter your event location.";
     if (!values.service.trim()) nextErrors.service = "Please choose the service you need.";
     if (values.message.trim().length < 20) {
       nextErrors.message = "Please add a short message with a few details.";
@@ -1813,12 +1813,12 @@ function ContactAndFaq({
       [
         "Hello Nivesah Weddings,",
         "",
-        "I would like to enquire about your wedding services.",
+        "I would like to enquire about your event coverage.",
         "",
         `Name: ${form.name.trim()}`,
         `Phone Number: ${form.phone.trim()}`,
-        `Wedding Date: ${form.date}`,
-        `Wedding Location: ${form.location.trim()}`,
+        `Event Date: ${form.date}`,
+        `Event Location: ${form.location.trim()}`,
         `Service Required: ${form.service.trim()}`,
         "",
         "Message:",
@@ -1875,7 +1875,7 @@ function ContactAndFaq({
               <span className="eyebrow text-champagne">Begin Your Story</span>
             </div>
             <h3 className="mb-6 font-display text-2xl leading-[1.05] sm:text-3xl md:mb-8 md:text-4xl">
-              Tell us about your <em className="text-champagne">wedding.</em>
+              Tell us about your <em className="text-champagne">event.</em>
             </h3>
             {selectedService ? (
               <div className="mb-6 flex items-start justify-between gap-4 border border-champagne/30 bg-champagne/10 p-4 text-sm text-ivory/85">
@@ -1907,7 +1907,7 @@ function ContactAndFaq({
                   error={errors.phone}
                 />
                 <Field
-                  label="Wedding Date"
+                  label="Event Date"
                   name="date"
                   type="date"
                   value={form.date}
@@ -1915,7 +1915,7 @@ function ContactAndFaq({
                   error={errors.date}
                 />
                 <Field
-                  label="Wedding Location"
+                  label="Event Location"
                   name="location"
                   value={form.location}
                   onChange={handleFieldChange}
@@ -1928,7 +1928,7 @@ function ContactAndFaq({
                 value={form.service}
                 onChange={handleFieldChange}
                 error={errors.service}
-                placeholder="Wedding Photography / Cinematography / Event Planning"
+                  placeholder="Photography / Cinematography / Event Planning"
               />
               <Field
                 label="Message"
@@ -1937,7 +1937,7 @@ function ContactAndFaq({
                 onChange={handleFieldChange}
                 error={errors.message}
                 textarea
-                placeholder="Tell us about your wedding vision, function count, venue, and anything special you want us to know."
+                placeholder="Tell us about your event vision, guest count, venue, and anything special you want us to know."
               />
               <button
                 type="submit"
