@@ -57,6 +57,7 @@ import insta7 from "@/assets/DSC07010.jpg";
 import insta8 from "@/assets/SMC02963.jpg";
 import insta9 from "@/assets/PSC06606 (1).jpg";
 import insta10 from "@/assets/DSC03859.jpg";
+import cinematographyCard from "@/assets/DSC00916_edit.jpg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 const WHATSAPP = "918446752571";
 const PHONE_DISPLAY = "84467 52571";
@@ -1005,7 +1006,7 @@ const SERVICES = [
     icon: Film,
     title: "Cinematography",
     desc: "Feature-style films with cinematic grading.",
-    image: insta3,
+    image: cinematographyCard,
   },
   {
     icon: Heart,
