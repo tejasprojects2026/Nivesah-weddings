@@ -2066,8 +2066,8 @@ function Footer() {
           </div>
           <div className="mt-8 overflow-hidden rounded-sm border border-ivory/15 bg-ivory/5">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1890.5970662561638!2d73.819954!3d18.610336!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c75553a089db%3A0x3cdcb146f9aad2c5!2siFilms%20Media%20Productions%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1782292811854!5m2!1sen!2sin"
-              title="iFilms Media Productions location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.181420890442!2d73.8189019!3d18.610908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b90f25af3b09%3A0x4ed49f29bc56e6d1!2sNivesah%20Weddings!5e0!3m2!1sen!2sin!4v1783312624456!5m2!1sen!2sin"
+              title="Nivesah Weddings location"
               className="h-44 w-full"
               style={{ border: 0 }}
               allowFullScreen
