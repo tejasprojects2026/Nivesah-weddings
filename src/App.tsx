@@ -20,14 +20,18 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-import hero from "@/assets/optimized/DSC04417.jpg";
-import rings from "@/assets/optimized/DSC01013.JPG";
 import about1 from "@/assets/optimized/DSC07684_edit.jpg";
 import about2 from "@/assets/optimized/DSC04547.jpg";
 import about3 from "@/assets/optimized/PSC09222.jpg";
 import about4 from "@/assets/optimized/SMC02978.jpg";
 import about5 from "@/assets/optimized/PSC09365.jpg";
 import about6 from "@/assets/optimized/DSC03904.jpg";
+import heroSlide1 from "@/assets/optimized/DSC08864.jpg";
+import heroSlide2 from "@/assets/optimized/DSC08674.jpg";
+import heroSlide3 from "@/assets/optimized/PSC09782.jpg";
+import heroCard1 from "@/assets/optimized/SMC04342.jpg";
+import heroCard2 from "@/assets/optimized/PSC09938 (1)-01.jpeg";
+import heroCard3 from "@/assets/optimized/4N5A3979.jpg";
 import nivesahLogo from "@/assets/optimized/Nivesah 4K-3.png";
 import p1 from "@/assets/optimized/portfolio/aanya-vihaan/DSC04090-1.jpg";
 import p1Alt1 from "@/assets/optimized/portfolio/aanya-vihaan/DSC04072-1.jpg";
@@ -80,7 +84,7 @@ const INSTAGRAM_SHOWCASE = [
     shortcode: "DZ7hpg1CIvP",
     href: "https://www.instagram.com/p/DZ7hpg1CIvP/",
     image: insta1,
-    label: "Feature Post",
+    label: "Meera & Kabir",
     title: "A promise framed in light.",
     caption:
       "Capturing the beautiful moments of a Sakharpuda filled with love, laughter, and the excitement of forever.",
@@ -89,7 +93,7 @@ const INSTAGRAM_SHOWCASE = [
     shortcode: "DZ4utliIDnh",
     href: "https://www.instagram.com/p/DZ4utliIDnh/",
     image: insta2,
-    label: "Booking Update",
+    label: "Naina & Veer",
     title: "Save the date, hold the feeling.",
     caption:
       "Wedding slots are filling fast. Secure yours and let the story be captured beautifully from the beginning.",
@@ -98,7 +102,7 @@ const INSTAGRAM_SHOWCASE = [
     shortcode: "DZZ5juRI66E",
     href: "https://www.instagram.com/reel/DZZ5juRI66E/",
     image: insta3,
-    label: "Instagram Reel",
+    label: "Saanvi & Ishaan",
     title: "The story begins with one beautiful frame.",
     caption:
       "A cinematic reel built around movement, emotion, and the beginning of a new wedding story.",
@@ -107,7 +111,7 @@ const INSTAGRAM_SHOWCASE = [
     shortcode: "DY6gZL7iKsK",
     href: "https://www.instagram.com/p/DY6gZL7iKsK/",
     image: insta4,
-    label: "Intimate Story",
+    label: "Anushka & Aarav",
     title: "Soft moments. Lasting memories.",
     caption:
       "A quiet yes, a lifetime ahead, and an intimate celebration captured with a documentary softness.",
@@ -162,6 +166,42 @@ const ABOUT_CAROUSEL = [
     badge: "Luxury Coverage",
     kicker: "Editorial Romance",
     title: "Every frame composed with emotion, movement, and grace.",
+  },
+] as const;
+
+const HERO_BACKGROUND_SLIDES = [
+  {
+    image: heroSlide1,
+    alt: "Couple celebrating together beneath a pastel floral wedding wall",
+  },
+  {
+    image: heroSlide2,
+    alt: "Bride and groom dancing joyfully during a wedding celebration",
+  },
+  {
+    image: heroSlide3,
+    alt: "Bride and groom sharing a sparkler-lit wedding moment",
+  },
+] as const;
+
+const HERO_EDITORIAL_SLIDES = [
+  {
+    image: heroCard1,
+    alt: "Bride receiving sindoor during a traditional wedding ritual",
+    volume: "Vol. 01",
+    title: "Sacred Details",
+  },
+  {
+    image: heroCard2,
+    alt: "Couple in an evening editorial portrait beside a reflective pool",
+    volume: "Vol. 02",
+    title: "Afterglow Portraits",
+  },
+  {
+    image: heroCard3,
+    alt: "Couple standing close together beneath glowing reception lights",
+    volume: "Vol. 03",
+    title: "Midnight Elegance",
   },
 ] as const;
 
@@ -530,14 +570,29 @@ function Nav() {
 }
 
 function Hero() {
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroSlide((current) => (current + 1) % HERO_BACKGROUND_SLIDES.length);
+    }, 4200);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <section id="top" className="relative min-h-[100svh] w-full overflow-hidden grain bg-ink">
       <div className="absolute inset-0">
-        <img
-          src={hero}
-          alt="Luxury wedding couple in golden light"
-          className="w-full h-full object-cover animate-kenburns"
-        />
+        {HERO_BACKGROUND_SLIDES.map((slide, index) => (
+          <img
+            key={slide.image}
+            src={slide.image}
+            alt={slide.alt}
+            className={`absolute inset-0 h-full w-full object-cover animate-kenburns transition-opacity duration-[1600ms] ${
+              activeHeroSlide === index ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/30 to-ink/80" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_rgba(0,0,0,0.6)_100%)]" />
       </div>
@@ -584,13 +639,22 @@ function Hero() {
           <div className="lg:col-span-4 relative hidden lg:block">
             <div className="glass rounded-sm bg-ivory/88 border border-white/60 p-3 animate-float">
               <div className="relative">
-                <img
-                  src={rings}
-                    alt="Wedding couple portrait"
-                  className="w-full h-[420px] object-cover"
-                  width={800}
-                  height={1024}
-                />
+                <div className="relative h-[420px] overflow-hidden">
+                  {HERO_EDITORIAL_SLIDES.map((slide, index) => (
+                    <img
+                      key={slide.image}
+                      src={slide.image}
+                      alt={slide.alt}
+                      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ${
+                        activeHeroSlide % HERO_EDITORIAL_SLIDES.length === index
+                          ? "opacity-100"
+                          : "opacity-0"
+                      }`}
+                      width={800}
+                      height={1024}
+                    />
+                  ))}
+                </div>
                 <div className="absolute right-4 top-4 flex flex-col gap-2">
                   {SOCIALS.map(({ icon: Icon, href, label }) => (
                     <a
@@ -608,10 +672,28 @@ function Hero() {
               </div>
               <div className="px-2 pt-4 pb-2 flex items-center justify-between text-ink">
                 <div>
-                  <p className="eyebrow text-olive">Vol. 01</p>
-                  <p className="font-display text-xl mt-1">Forever, Captured</p>
+                  <p className="eyebrow text-olive">
+                    {HERO_EDITORIAL_SLIDES[activeHeroSlide % HERO_EDITORIAL_SLIDES.length].volume}
+                  </p>
+                  <p className="font-display text-xl mt-1">
+                    {HERO_EDITORIAL_SLIDES[activeHeroSlide % HERO_EDITORIAL_SLIDES.length].title}
+                  </p>
                 </div>
-                <Sparkles className="size-5 text-olive" />
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1.5">
+                    {HERO_EDITORIAL_SLIDES.map((slide, index) => (
+                      <span
+                        key={slide.title}
+                        className={`h-1.5 rounded-full transition-all duration-500 ${
+                          activeHeroSlide % HERO_EDITORIAL_SLIDES.length === index
+                            ? "w-6 bg-olive"
+                            : "w-1.5 bg-olive/35"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <Sparkles className="size-5 text-olive" />
+                </div>
               </div>
             </div>
             <div className="absolute -top-8 -left-10 glass rounded-sm bg-ivory/88 border border-white/60 px-5 py-4 text-ink hidden xl:block">
@@ -837,12 +919,18 @@ function About() {
             </p>
           </div>
 
-          <figure className="mt-10 max-w-lg border-l-2 border-olive pl-5 sm:mt-12 sm:pl-6">
-            <blockquote className="font-display text-xl leading-snug text-ink italic md:text-3xl">
-              "Every celebration has a soul. We preserve it beautifully."
-            </blockquote>
-            <figcaption className="mt-3 eyebrow">â€” The Nivesah Atelier</figcaption>
-          </figure>
+          <div className="mt-10 overflow-hidden sm:mt-12">
+            <div className="grid grid-cols-2">
+              {TRUST.slice(0, 2).map(({ target, label, format }, index) => (
+                <div
+                  key={label}
+                  className="flex min-h-[98px] flex-col items-center justify-center px-3 py-4 text-center sm:min-h-[108px] sm:px-4"
+                >
+                  <TrustStat active={true} target={target} label={label} format={format} compact />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -925,9 +1013,6 @@ function InstagramShowcase() {
                   <p className="mt-6 max-w-md font-display text-2xl leading-[1.08] text-ink sm:text-3xl lg:text-[2.2rem]">
                     {activeStory.title}
                   </p>
-                  <p className="mt-5 max-w-md text-sm leading-relaxed text-foreground/70 sm:text-[0.98rem]">
-                    {activeStory.caption}
-                  </p>
                   <a
                     href={activeStory.href}
                     target="_blank"
@@ -938,15 +1023,13 @@ function InstagramShowcase() {
                   </a>
                 </div>
 
-                  <div className="mt-8 grid grid-cols-2 gap-3 border-t border-border/70 pt-5 text-[0.68rem] uppercase tracking-[0.28em] text-foreground/55 sm:max-w-md">
-                    <div>
-                      <p className="text-foreground/45">Post Type</p>
-                      <p className="mt-2 text-olive">{activeStory.label}</p>
-                    </div>
-                    <div>
-                      <p className="text-foreground/45">Source</p>
-                    <p className="mt-2 text-olive">Instagram</p>
-                  </div>
+                <div className="mt-8 border-t border-border/70 pt-5 sm:max-w-md">
+                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/45">
+                    Original Caption
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/70 sm:text-[0.98rem]">
+                    {activeStory.caption}
+                  </p>
                 </div>
               </div>
             </div>
@@ -1077,65 +1160,46 @@ function Services({
               <span className="hairline" />
               <span className="eyebrow">Our Services</span>
             </div>
-            <h2 className="max-w-2xl font-display text-3xl leading-[1.05] md:text-5xl lg:text-6xl">
-              Crafted with <em className="text-olive">intention.</em>
-              <br />
-              Delivered with poise.
-            </h2>
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
+              <h2 className="max-w-none font-display text-3xl leading-[1.05] md:text-[3.15rem] lg:whitespace-nowrap lg:text-[2.95rem]">
+                Crafted with <em className="text-olive">intention.</em> Delivered with poise.
+              </h2>
+              <div className="flex items-center gap-2 text-[0.8rem] uppercase tracking-[0.28em] text-olive md:text-[0.92rem] lg:shrink-0">
+                <MapPin className="size-4 md:size-[1.05rem]" />
+                <span>Pan India Coverage</span>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div
-          className="relative mb-8 flex flex-col items-start gap-3 border border-olive/15 bg-ivory/70 px-4 py-4 text-sm text-foreground/75 backdrop-blur-sm sm:mb-10 sm:flex-row sm:items-center sm:gap-4 sm:px-6"
-          data-reveal
-        >
-          <div className="flex items-center gap-3 text-olive">
-            <MapPin className="size-4" />
-            <span className="eyebrow text-olive">Pan India Coverage</span>
-          </div>
-          <p className="font-light leading-relaxed">
-            Available across India for photography, films, albums, and planning.
-          </p>
         </div>
 
         <div className="relative grid grid-cols-1 gap-px bg-border/60 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
-          {SERVICES.map(({ icon: Icon, title, desc, image }, i) => (
+          {SERVICES.map(({ icon: Icon, title, desc }, i) => (
             <button
               key={title}
               type="button"
               onClick={() => onSelectService(title)}
               aria-pressed={selectedService === title}
-              className={`group relative isolate min-h-[248px] overflow-hidden border border-white/35 bg-ivory/82 p-6 text-left backdrop-blur-[2px] transition-all duration-500 active:bg-ivory/70 [touch-action:manipulation] sm:min-h-[290px] sm:p-8 lg:min-h-[340px] lg:p-10 md:hover:bg-ivory/70 ${
+              className={`group relative isolate min-h-[200px] overflow-hidden border border-white/35 bg-ivory/82 p-6 text-left backdrop-blur-[2px] transition-all duration-300 active:bg-ivory/70 [touch-action:manipulation] sm:min-h-[220px] sm:p-7 lg:min-h-[250px] lg:p-8 ${
                 selectedService === title ? "ring-1 ring-olive/40" : ""
               }`}
             >
-              <div className="absolute inset-0 -z-20 overflow-hidden">
-                <img
-                  src={image}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-full w-full scale-110 object-cover opacity-0 transition-all duration-700 md:group-hover:scale-100 md:group-hover:opacity-100"
-                  loading="lazy"
-                />
-              </div>
-              <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(248,242,233,0.96),rgba(244,237,226,0.94))] transition-all duration-700 md:group-hover:bg-[linear-gradient(180deg,rgba(248,242,233,0.22),rgba(244,237,226,0.12))]" />
-              <div className="absolute inset-0 -z-10 bg-olive/0 transition-colors duration-700 md:group-hover:bg-olive/5" />
-              <span className="absolute right-5 top-5 text-[0.62rem] tracking-[0.28em] text-olive/70 transition-all duration-500 md:group-hover:translate-y-2 md:group-hover:opacity-0 sm:right-6 sm:top-6 sm:text-[0.65rem]">
+              <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(248,242,233,0.96),rgba(244,237,226,0.94))]" />
+              <span className="absolute right-5 top-5 text-[0.62rem] tracking-[0.28em] text-olive/70 sm:right-6 sm:top-6 sm:text-[0.65rem]">
                 / {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="relative mb-7 flex size-12 items-center justify-center rounded-full border border-olive/40 transition-all duration-500 md:group-hover:translate-y-3 md:group-hover:opacity-0 sm:mb-8 sm:size-14">
+              <div className="relative mb-5 flex size-12 items-center justify-center rounded-full border border-olive/40 sm:mb-6 sm:size-13">
                 <Icon
-                  className="size-4 text-olive transition-colors md:group-hover:text-ivory sm:size-5"
+                  className="size-4 text-olive sm:size-[1.1rem]"
                   strokeWidth={1.4}
                 />
               </div>
-              <h3 className="relative pr-10 font-display text-[1.85rem] leading-[1.1] transition-all duration-500 md:group-hover:translate-y-4 md:group-hover:opacity-0 sm:pr-12 sm:text-2xl">
+              <h3 className="relative pr-10 font-display text-[1.65rem] leading-[1.1] sm:pr-12 sm:text-[1.9rem]">
                 {title}
               </h3>
-              <p className="relative mt-3 max-w-[22rem] text-sm leading-relaxed text-foreground/70 transition-all duration-500 font-light md:group-hover:translate-y-4 md:group-hover:opacity-0">
+              <p className="relative mt-3 max-w-[22rem] text-sm leading-relaxed text-foreground/70 font-light">
                 {desc}
               </p>
-              <span className="relative mt-6 block h-px w-full bg-olive/35 transition-all duration-700 md:w-0 md:bg-olive md:group-hover:w-full md:group-hover:opacity-0" />
+              <span className="relative mt-5 block h-px w-full bg-olive/35" />
               <span className="relative mt-5 inline-flex text-[0.62rem] uppercase tracking-[0.3em] text-olive/80 sm:hidden">
                 Tap to enquire
               </span>
@@ -1183,6 +1247,7 @@ function Experience() {
               stroke="currentColor"
               strokeWidth="1"
               strokeDasharray="2 6"
+              className="animate-dashed-flow"
             />
           </svg>
           {STAGES.map(([n, t, d]) => (
@@ -1232,23 +1297,33 @@ function TrustStat({
   target,
   label,
   format,
+  compact = false,
 }: {
   active: boolean;
   target: number;
   label: string;
   format: (value: number) => string;
+  compact?: boolean;
 }) {
   const value = useCountUp(active, target);
 
   return (
     <>
       <div
-        className="text-4xl text-olive leading-none sm:text-5xl md:text-6xl"
+        className={`text-4xl text-olive leading-none ${
+          compact ? "text-[2rem] sm:text-[2.15rem] md:text-[2.35rem]" : "sm:text-5xl md:text-6xl"
+        }`}
         style={{ fontFamily: '"Prata", serif' }}
       >
         {format(value)}
       </div>
-      <p className="mt-3 max-w-[16ch] text-[0.65rem] tracking-[0.28em] uppercase text-foreground/60 sm:mt-4 sm:text-[0.72rem] sm:tracking-[0.34em]">
+      <p
+        className={`max-w-[16ch] uppercase text-foreground/60 ${
+          compact
+            ? "mt-1.5 text-[0.5rem] tracking-[0.14em] sm:mt-2 sm:text-[0.54rem] sm:tracking-[0.18em]"
+            : "mt-3 text-[0.65rem] tracking-[0.28em] sm:mt-4 sm:text-[0.72rem] sm:tracking-[0.34em]"
+        }`}
+      >
         {label}
       </p>
     </>
