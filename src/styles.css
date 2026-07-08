@@ -193,11 +193,25 @@
   100% { transform: scale(1.18) translateY(-2%) }
 }
 @keyframes dashed-flow {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -32; }
+  0% {
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: 0;
+  }
+  35% {
+    stroke-dasharray: 100 0;
+    stroke-dashoffset: 0;
+  }
+  45% {
+    stroke-dasharray: 2 6;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 2 6;
+    stroke-dashoffset: -32;
+  }
 }
 
 @utility animate-float { animation: float-slow 6s ease-in-out infinite; }
 @utility animate-reveal { animation: reveal 1s cubic-bezier(.2,.7,.2,1) both; }
 @utility animate-kenburns { animation: kenburns 18s ease-out infinite alternate; }
-@utility animate-dashed-flow { animation: dashed-flow 3.8s linear infinite; }
+@utility animate-dashed-flow { animation: dashed-flow 5.2s linear infinite; }

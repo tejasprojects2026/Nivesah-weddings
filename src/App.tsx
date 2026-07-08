@@ -190,18 +190,21 @@ const HERO_EDITORIAL_SLIDES = [
     alt: "Bride receiving sindoor during a traditional wedding ritual",
     volume: "Vol. 01",
     title: "Sacred Details",
+    position: "center center",
   },
   {
     image: heroCard2,
     alt: "Couple in an evening editorial portrait beside a reflective pool",
     volume: "Vol. 02",
     title: "Afterglow Portraits",
+    position: "center center",
   },
   {
     image: heroCard3,
     alt: "Couple standing close together beneath glowing reception lights",
     volume: "Vol. 03",
     title: "Midnight Elegance",
+    position: "center 20%",
   },
 ] as const;
 
@@ -446,6 +449,7 @@ function Nav() {
           <img
             src={nivesahLogo}
             alt="Nivesah Weddings by iFilms Media"
+            decoding="async"
             className={`h-11 w-[125px] sm:w-[135px] lg:w-[145px] object-contain object-left rounded-xl bg-white/95 p-1 transition-all duration-500 ${
               scrolled ? "shadow-sm" : "shadow-[0_10px_30px_-18px_rgba(0,0,0,0.85)]"
             }`}
@@ -588,6 +592,9 @@ function Hero() {
             key={slide.image}
             src={slide.image}
             alt={slide.alt}
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={index === 0 ? "high" : "low"}
             className={`absolute inset-0 h-full w-full object-cover animate-kenburns transition-opacity duration-[1600ms] ${
               activeHeroSlide === index ? "opacity-100" : "opacity-0"
             }`}
@@ -645,11 +652,15 @@ function Hero() {
                       key={slide.image}
                       src={slide.image}
                       alt={slide.alt}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchPriority={index === 0 ? "high" : "low"}
                       className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ${
                         activeHeroSlide % HERO_EDITORIAL_SLIDES.length === index
                           ? "opacity-100"
                           : "opacity-0"
                       }`}
+                      style={{ objectPosition: slide.position }}
                       width={800}
                       height={1024}
                     />
@@ -914,7 +925,7 @@ function About() {
             </p>
             <p>
               All aspects of event planning, execution, and professional post-production are
-              covered by us â€” so you can be sure your celebration is captured to perfection and
+              covered by us, so you can be sure your celebration is captured to perfection and
               runs smoothly.
             </p>
           </div>
@@ -1246,7 +1257,7 @@ function Experience() {
               fill="none"
               stroke="currentColor"
               strokeWidth="1"
-              strokeDasharray="2 6"
+              pathLength={100}
               className="animate-dashed-flow"
             />
           </svg>
@@ -1331,55 +1342,7 @@ function TrustStat({
 }
 
 function Trust() {
-  const ref = useReveal();
-  const statsRef = useRef<HTMLDivElement | null>(null);
-  const [isCounting, setIsCounting] = useState(false);
-
-  useEffect(() => {
-    const node = statsRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setIsCounting(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section
-      ref={ref}
-      className="-mt-2 w-full border-y border-border bg-[linear-gradient(180deg,#f8f2e9_0%,#f4ede2_100%)] py-8 lg:-mt-4 lg:py-10"
-    >
-      <div className="w-full px-0">
-        <div
-          ref={statsRef}
-          className="grid grid-cols-2 lg:grid-cols-4 border-y border-border/80"
-          data-reveal
-        >
-          {TRUST.map(({ target, label, format }, index) => (
-            <div
-              key={label}
-              className={`flex min-h-[150px] flex-col items-center justify-center px-4 py-8 text-center sm:min-h-[180px] sm:px-8 sm:py-10 ${
-                index % 2 === 0 ? "border-r border-border/80 lg:border-r" : "lg:border-r border-border/80"
-              } ${index === TRUST.length - 1 ? "border-r-0" : ""} ${
-                index === 1 ? "border-r-0 lg:border-r" : ""
-              }`}
-            >
-              <TrustStat active={isCounting} target={target} label={label} format={format} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return null;
 }
 
 const PORTFOLIO = [
@@ -1449,7 +1412,7 @@ function Portfolio() {
               <span className="hairline" />
               <span className="eyebrow">Selected Stories</span>
             </div>
-            <h2 className="max-w-2xl font-display text-3xl leading-[1.05] md:text-5xl lg:text-6xl">
+            <h2 className="max-w-none font-display text-3xl leading-[1.05] md:text-5xl lg:whitespace-nowrap lg:text-[4.35rem]">
               A portfolio of <em className="text-olive">love,</em> light and legacy.
             </h2>
           </div>
@@ -1475,9 +1438,6 @@ function Portfolio() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent opacity-90" />
               <div className="absolute inset-x-0 bottom-0 p-4 text-ivory sm:p-6 lg:p-8">
-                <p className="eyebrow text-champagne flex items-center gap-2">
-                  <MapPin className="size-3" /> {p.loc}
-                </p>
                 <h3 className="mt-2 font-display text-xl sm:text-2xl lg:text-3xl">{p.couple}</h3>
                 <span className="mt-3 inline-flex items-center gap-2 text-[0.7rem] tracking-[0.3em] uppercase opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                   View Story <ArrowUpRight className="size-3.5" />
@@ -1580,7 +1540,7 @@ function YouTubeFeedSection() {
               <span className="hairline bg-champagne" />
               <span className="eyebrow text-champagne">Film Room</span>
             </div>
-            <h2 className="max-w-3xl font-display text-3xl leading-[1.02] text-ivory md:text-5xl lg:text-6xl">
+            <h2 className="max-w-none font-display text-3xl leading-[1.02] text-ivory md:text-5xl lg:whitespace-nowrap lg:text-[4.15rem]">
               A curated <em className="text-champagne">screening room</em> for our wedding films.
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ivory/70 sm:text-base">
@@ -1726,7 +1686,7 @@ const TESTIMONIALS = [
     name: "Saanvi & Ishaan",
     loc: "Goa Destination",
     quote:
-      "They captured the soul of our days â€” the laughter, the tears, the tiny in-between glances. Pure magic.",
+      "They captured the soul of our days, the laughter, the tears, the tiny in-between glances. Pure magic.",
   },
 ];
 
@@ -1774,23 +1734,23 @@ function Testimonials() {
 const FAQS = [
   {
     q: "What services do you provide?",
-    a: "Wedding photography, cinematography, pre-wedding shoots, candid coverage, films, luxury albums, professional editing and full event planning.",
+    a: "We provide wedding photography, candid wedding photography, wedding cinematography, pre-wedding shoots, bridal portraits, couple portraits, cinematic wedding films, luxury wedding albums, professional photo editing, and complete wedding event planning.",
   },
   {
     q: "Do you cover destination weddings?",
-    a: "Absolutely â€” within India and abroad. Travel and accommodation are quoted transparently in your bespoke package.",
+    a: "Yes, we cover destination wedding photography and destination wedding cinematography across India and for international celebrations. Travel, stay, and production logistics are shared clearly in your custom wedding package.",
   },
   {
     q: "Can we customize packages?",
-    a: "Yes. Every Nivesah experience is tailored to your celebration, scale and creative vision.",
+    a: "Yes. Our custom wedding photography packages are tailored to your guest count, rituals, venues, coverage style, wedding film needs, album preferences, and overall creative vision.",
   },
   {
     q: "How early should we book?",
-    a: "We recommend reserving your date 6 to 9 months in advance. Peak season dates often fill earlier.",
+    a: "We recommend booking your wedding photographer and wedding cinematographer 6 to 9 months in advance. Premium wedding dates in peak season and popular destination wedding weekends are usually reserved even earlier.",
   },
   {
     q: "Do you provide albums and wedding films?",
-    a: "Yes â€” hand-bound archival albums and full cinematic films with highlight trailers and ceremonial cuts.",
+    a: "Yes, we deliver luxury wedding albums, hand-bound archival photo books, cinematic wedding films, wedding teaser reels, highlight trailers, and full ceremony edits designed for timeless storytelling.",
   },
 ];
 
@@ -2087,6 +2047,8 @@ function Footer() {
             <img
               src={nivesahLogo}
               alt="Nivesah Weddings by iFilms Media"
+              loading="lazy"
+              decoding="async"
               className="h-16 w-[220px] rounded-sm bg-white p-2 object-contain object-left sm:h-20 sm:w-[280px]"
             />
             <span className="font-display text-2xl sm:text-3xl">Nivesah Weddings</span>
@@ -2138,8 +2100,17 @@ function Footer() {
                 <Icon className="size-4" strokeWidth={1.4} />
               </a>
             ))}
+            <a
+              href="https://maps.google.com/?q=Nivesah%20Weddings"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Map"
+              className="size-11 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-olive hover:border-olive transition-colors"
+            >
+              <MapPin className="size-4" strokeWidth={1.4} />
+            </a>
           </div>
-          <div className="mt-8 overflow-hidden rounded-sm border border-ivory/15 bg-ivory/5">
+          <div className="mt-6 overflow-hidden rounded-sm border border-ivory/15 bg-ivory/5">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.181420890442!2d73.8189019!3d18.610908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b90f25af3b09%3A0x4ed49f29bc56e6d1!2sNivesah%20Weddings!5e0!3m2!1sen!2sin!4v1783312624456!5m2!1sen!2sin"
               title="Nivesah Weddings location"
