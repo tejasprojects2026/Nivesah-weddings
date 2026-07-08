@@ -121,20 +121,20 @@ const INSTAGRAM_SHOWCASE = [
 const SERVICE_MESSAGES = {
   "Wedding Photography":
     "Hello Nivesah Weddings, I would love to enquire about Wedding Photography coverage for our celebration. Please share package details, availability, and the overall experience.",
-  Cinematography:
-    "Hello Nivesah Weddings, I am interested in Cinematography for our wedding. Please share your film coverage options, deliverables, and pricing.",
+  "Wedding Cinematic Shoot":
+    "Hello Nivesah Weddings, I am interested in your Wedding Cinematic Shoot service. Please share your film coverage options, deliverables, and pricing.",
   "Pre-Wedding Shoots":
     "Hello Nivesah Weddings, we would like to enquire about a Pre-Wedding Shoot. Please guide us on locations, concepts, and package options.",
-  "Candid Photography":
-    "Hello Nivesah Weddings, I am looking for Candid Photography coverage for our wedding events. Please share your approach, availability, and pricing.",
-  "Wedding Films":
-    "Hello Nivesah Weddings, I would like to know more about your Wedding Films service. Please share details on trailers, highlight reels, and full film delivery.",
+  "Destination Weddings":
+    "Hello Nivesah Weddings, we would like to enquire about Destination Wedding coverage. Please share your outstation coverage process, availability, and package details.",
+  "Corporate Photo & Film":
+    "Hello Nivesah Weddings, I am interested in your Corporate Photo & Film service. Please share details on portraits, event coverage, and brand visual deliverables.",
   "Luxury Albums":
     "Hello Nivesah Weddings, I am interested in your Luxury Albums. Please share album styles, finishes, and package details.",
-  "Professional Editing":
-    "Hello Nivesah Weddings, I would like to enquire about Professional Editing support for our wedding visuals. Please share details on editing, grading, and delivery timelines.",
-  "Event Planning":
-    "Hello Nivesah Weddings, we would like to enquire about Event Planning support for our wedding. Please share how your planning service works and what is included.",
+  "Curated Portrait Sessions":
+    "Hello Nivesah Weddings, I would like to enquire about Curated Portrait Sessions. Please share the session style, planning details, and package options.",
+  "Event Planning & Direction":
+    "Hello Nivesah Weddings, we would like to enquire about Event Planning & Direction support for our wedding. Please share how your planning service works and what is included.",
 } as const;
 
 type ServiceTitle = keyof typeof SERVICE_MESSAGES;
@@ -211,21 +211,21 @@ const HERO_EDITORIAL_SLIDES = [
 const YOUTUBE_FEATURED_VIDEOS = [
   {
     id: "0_MNBs54zlI",
-    title: "Samarpan X Esha | Cinematic Engagement Highlight",
+    title: "Samarpan X Esha | Cinematic Engagement Highlight | Nivesah Weddings",
     note: "A polished engagement highlight with cinematic rhythm and warm celebration frames.",
     label: "Feature Film",
     location: "Engagement Story",
   },
   {
     id: "WaXRJXUzXr4",
-    title: "Samarpan & Esha | Engagement Teaser",
+    title: "Samarpan & Esha | Engagement Teaser | Nivesah Weddings and Pre- Weddings",
     note: "A teaser cut designed for emotion, energy, and a more intimate editorial pace.",
     label: "Editorial Cut",
     location: "Teaser Edit",
   },
   {
     id: "IOQxk5LSNi8",
-    title: "Anoop & Liza | Cinematic Wedding Highlight Film",
+    title: "Anoop & Liza | Cinematic Wedding Highlight Film | Nivesah Weddings and Pre- Weddings",
     note: "A wedding highlight film built around movement, ceremony details, and atmosphere.",
     label: "Signature Reel",
     location: "Wedding Highlight",
@@ -630,16 +630,13 @@ function Hero() {
               >
                 Book Your Story
               </a>
-              <a href="#portfolio" className="btn-ghost w-full sm:w-auto">
-                View Films
+              <a
+                href={`tel:${WHATSAPP}`}
+                className="btn-ghost w-full sm:w-auto inline-flex items-center justify-center gap-3"
+              >
+                <Phone className="size-4" />
+                <span>{PHONE_DISPLAY}</span>
               </a>
-            <a
-              href={`tel:${WHATSAPP}`}
-              className="hidden flex-wrap items-center gap-3 text-sm text-ivory/90 transition-colors sm:flex sm:pl-2 hover:text-champagne"
-            >
-              <Phone className="size-4" />
-              <span className="tracking-[0.3em] sm:tracking-[0.38em]">{PHONE_DISPLAY}</span>
-            </a>
             </div>
           </div>
 
@@ -1093,49 +1090,49 @@ const SERVICES = [
   {
     icon: Camera,
     title: "Wedding Photography",
-    desc: "Editorial portraits and candid frames.",
+    desc: "Editorial portraits, quiet moments and the frames in between.",
     image: insta1,
   },
   {
     icon: Film,
-    title: "Cinematography",
-    desc: "Feature-style films with cinematic grading.",
+    title: "Wedding Cinematic Shoot",
+    desc: "Feature-length films and ceremony reels, graded for the screen.",
     image: cinematographyCard,
   },
   {
     icon: Heart,
     title: "Pre-Wedding Shoots",
-    desc: "Intimate love stories across beautiful locations.",
+    desc: "Intimate narratives across handpicked locations.",
     image: insta4,
   },
   {
     icon: Aperture,
-    title: "Candid Photography",
-    desc: "Honest emotion between planned moments.",
+    title: "Destination Weddings",
+    desc: "Full-coverage production for ceremonies beyond city limits.",
     image: insta2,
   },
   {
     icon: Sparkles,
-    title: "Wedding Films",
-    desc: "Trailers, reels and ceremonial films.",
+    title: "Corporate Photo & Film",
+    desc: "Executive portraits, event coverage and brand visual content.",
     image: insta5,
   },
   {
     icon: BookOpen,
     title: "Luxury Albums",
-    desc: "Hand-bound archival heirloom albums.",
+    desc: "Hand-bound archival albums, printed for generations.",
     image: insta6,
   },
   {
     icon: Scissors,
-    title: "Professional Editing",
-    desc: "Color, sound and story refinement.",
+    title: "Curated Portrait Sessions",
+    desc: "Styled sessions for milestones that deserve their own frame.",
     image: insta10,
   },
   {
     icon: CalendarCheck,
-    title: "Event Planning",
-    desc: "Coordinated execution for a seamless day.",
+    title: "Event Planning & Direction",
+    desc: "On-ground coordination so the day runs as designed.",
     image: insta8,
   },
 ];
@@ -1349,14 +1346,14 @@ const PORTFOLIO = [
   {
     img: p1,
     couple: "Aanya & Vihaan",
-    loc: "Udaipur, Rajasthan",
+    loc: "Udaipur",
     h: "sm:row-span-2",
     gallery: [p1, p1Alt1, p1Alt2],
   },
   {
     img: p2,
     couple: "Riya & Arjun",
-    loc: "Pune, Maharashtra",
+    loc: "Pune",
     h: "",
     gallery: [p2, p2Alt1, p2Alt2],
   },
@@ -1465,7 +1462,7 @@ function Portfolio() {
                 <img
                   src={activeImage ?? activeStory.gallery[0]}
                   alt={activeStory.couple}
-                  className="h-[42svh] w-full object-cover sm:h-[55vh] lg:h-[80vh]"
+                  className="h-[42svh] w-full object-contain sm:h-[55vh] lg:h-[80vh]"
                 />
               </div>
               <div className="p-5 sm:p-6 lg:p-8">
@@ -1623,12 +1620,12 @@ function YouTubeFeedSection() {
                       : "border-border bg-ivory/95 hover:-translate-y-1 hover:border-olive/40"
                   }`}
                 >
-                  <div className="grid min-h-[168px] grid-cols-[92px_1fr] sm:min-h-[190px]">
-                    <div className="relative overflow-hidden">
+                  <div className="grid min-h-[168px] grid-cols-[112px_1fr] sm:min-h-[190px] sm:grid-cols-[116px_1fr]">
+                    <div className="relative overflow-hidden bg-[#0f0d0b]">
                       <img
                         src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
                         alt={video.title}
-                        className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                        className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-r from-ink/55 to-transparent" />
@@ -1917,9 +1914,6 @@ function ContactAndFaq({
               <div className="mb-6 flex items-start justify-between gap-4 border border-champagne/30 bg-champagne/10 p-4 text-sm text-ivory/85">
                 <div>
                   <p className="eyebrow text-champagne">Prefilled Enquiry</p>
-                  <p className="mt-2 leading-relaxed">
-                    Your form is prepared for <span className="text-champagne">{selectedService}</span>.
-                  </p>
                 </div>
                 <button
                   type="button"
@@ -2215,19 +2209,6 @@ function HeroBanner() {
                 className="btn-primary w-full sm:w-auto bg-white text-ink border-white hover:bg-transparent hover:text-white"
               >
                 Book Your Story
-              </a>
-              <a
-                href="#portfolio"
-                className="btn-ghost w-full sm:w-auto border-white/75 text-white hover:bg-white hover:text-ink"
-              >
-                View Films
-              </a>
-              <a
-                href={`tel:${WHATSAPP}`}
-                className="hidden flex-wrap items-center justify-center gap-3 text-sm text-ivory/95 transition-colors sm:flex hover:text-champagne"
-              >
-                <Phone className="size-4" />
-                <span className="tracking-[0.3em] sm:tracking-[0.38em]">{PHONE_DISPLAY}</span>
               </a>
             </div>
           </div>

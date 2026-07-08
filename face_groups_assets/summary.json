@@ -1,0 +1,7 @@
+{
+  "input_dir": "src\\assets",
+  "images_scanned": 408,
+  "faces_detected": 655,
+  "groups_written": 119,
+  "output_dir": "face_groups_assets"
+}

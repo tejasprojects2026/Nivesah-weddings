@@ -1,0 +1,7 @@
+{
+  "input_dir": "src\\assets\\portfolio\\aanya-vihaan",
+  "images_scanned": 6,
+  "faces_detected": 3,
+  "groups_written": 1,
+  "output_dir": "face_groups_aanya_dbscan"
+}

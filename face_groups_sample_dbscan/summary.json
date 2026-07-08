@@ -1,0 +1,7 @@
+{
+  "input_dir": "src\\assets\\couple1",
+  "images_scanned": 5,
+  "faces_detected": 5,
+  "groups_written": 0,
+  "output_dir": "face_groups_sample_dbscan"
+}
