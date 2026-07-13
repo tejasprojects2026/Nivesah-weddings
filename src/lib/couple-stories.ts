@@ -56,7 +56,7 @@ import c8_2 from "@/assets/optimized/couple8/PSC09266.jpg";
 import c8_3 from "@/assets/optimized/couple8/PSC09275.jpg";
 import c8_4 from "@/assets/optimized/couple8/PSC09300.jpg";
 import c8_5 from "@/assets/optimized/couple8/PSC09308.jpg";
-import c8_6 from "@/assets/optimized/couple8/SMC04987.jpg";
+import c8_6 from "@/assets/optimized/couple8/SMC04987.JPG";
 import c8_7 from "@/assets/optimized/couple8/SMC05005 (1).jpg";
 import c8_8 from "@/assets/optimized/couple8/SMC05037 (1).jpg";
 import c9_1 from "@/assets/prewedding shoot/DSC01711.jpg";
