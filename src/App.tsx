@@ -1514,10 +1514,10 @@ function YouTubeFeedSection() {
 
         <div className="relative grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_420px]" data-reveal>
           <div className="overflow-hidden border border-white/10 bg-[#181410] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
-            <div className="border-b border-white/10 px-5 py-4 text-ivory sm:px-6">
+            <div className="border-b border-white/10 px-4 py-3 text-ivory sm:px-5">
               <div>
                 <div>
-                  <h3 className="font-display text-2xl leading-tight sm:text-3xl">
+                  <h3 className="font-display text-lg leading-tight sm:text-xl lg:truncate lg:whitespace-nowrap lg:text-[1.35rem]">
                     {activeVideo.title}
                   </h3>
                 </div>
@@ -1605,7 +1605,7 @@ function YouTubeFeedSection() {
                             isActive ? "text-olive" : "text-foreground/55 group-hover:text-olive"
                           }`}
                         >
-                          <ArrowUpRight className="size-3.5" />
+                          Watch Now <ArrowUpRight className="size-3.5" />
                         </span>
                       </div>
                     </div>
