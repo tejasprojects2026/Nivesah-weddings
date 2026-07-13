@@ -1592,7 +1592,7 @@ function YouTubeFeedSection() {
                             isActive ? "text-olive" : "text-foreground/55 group-hover:text-olive"
                           }`}
                         >
-                          Play Cut <ArrowUpRight className="size-3.5" />
+                          <ArrowUpRight className="size-3.5" />
                         </span>
                       </div>
                     </div>
@@ -1657,9 +1657,6 @@ function Testimonials() {
               </p>
               <div className="mt-8 border-t border-border pt-6 text-left">
                 <p className="font-display text-lg leading-none">{t.name}</p>
-                <p className="mt-1 text-[0.7rem] tracking-[0.25em] uppercase text-foreground/55">
-                  {t.loc}
-                </p>
               </div>
             </article>
           ))}
@@ -2062,6 +2059,14 @@ function Footer() {
         <p className="font-sans text-[0.7rem] font-medium leading-none uppercase tracking-[0.3em] text-ivory/38">
           © {new Date().getFullYear()} iFilms Media Productions Pvt. Ltd. All rights reserved.
         </p>
+        <a
+          href="https://ifilmsmedia.in"
+          target="_blank"
+          rel="noreferrer"
+          className="font-sans text-[0.7rem] font-medium leading-none uppercase tracking-[0.3em] text-ivory/45 transition-colors hover:text-champagne"
+        >
+          ifilmsmedia.in
+        </a>
       </div>
     </footer>
   );
