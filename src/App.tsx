@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type RefObject } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type RefObject } from "react";
 import {
   Camera,
   Film,
@@ -33,24 +33,7 @@ import heroCard1 from "@/assets/optimized/SMC04342.jpg";
 import heroCard2 from "@/assets/optimized/PSC09938 (1)-01.jpeg";
 import heroCard3 from "@/assets/optimized/4N5A3979.jpg";
 import nivesahLogo from "@/assets/optimized/Nivesah 4K-3.png";
-import p1 from "@/assets/optimized/portfolio/aanya-vihaan/DSC04090-1.jpg";
-import p1Alt1 from "@/assets/optimized/portfolio/aanya-vihaan/DSC04072-1.jpg";
-import p1Alt2 from "@/assets/optimized/portfolio/aanya-vihaan/DSC04112.jpg";
-import p2 from "@/assets/optimized/portfolio/riya-arjun/PSC07522.jpg";
-import p2Alt1 from "@/assets/optimized/portfolio/riya-arjun/PSC07518.jpg";
-import p2Alt2 from "@/assets/optimized/portfolio/riya-arjun/PSC07533.jpg";
-import p3 from "@/assets/optimized/portfolio/meera-kabir/DSC07912_edit.jpg";
-import p3Alt1 from "@/assets/optimized/portfolio/meera-kabir/DSC07934.jpg";
-import p3Alt2 from "@/assets/optimized/portfolio/meera-kabir/DSC07974_edit.jpg";
-import p4 from "@/assets/optimized/portfolio/saanvi-ishaan/SMC04386-01.jpg";
-import p4Alt1 from "@/assets/optimized/portfolio/saanvi-ishaan/SMC04709.jpg";
-import p4Alt2 from "@/assets/optimized/portfolio/saanvi-ishaan/SMC05005 (1).jpg";
-import p5 from "@/assets/optimized/portfolio/naina-veer/DSC04417.jpg";
-import p5Alt1 from "@/assets/optimized/portfolio/naina-veer/DSC04426.jpg";
-import p5Alt2 from "@/assets/optimized/portfolio/naina-veer/DSC04430.jpg";
-import p6 from "@/assets/optimized/portfolio/anushka-aarav/PSC02898.jpg";
-import p6Alt1 from "@/assets/optimized/portfolio/anushka-aarav/PSC02985.jpg";
-import p6Alt2 from "@/assets/optimized/portfolio/anushka-aarav/PSC03073.jpg";
+import { COUPLE_STORIES } from "@/lib/couple-stories";
 import insta1 from "@/assets/optimized/PSC09943.jpg";
 import insta2 from "@/assets/optimized/DSC09821_edit.jpg";
 import insta3 from "@/assets/optimized/SMC08424 (2).jpg";
@@ -849,14 +832,14 @@ function About() {
       altSecondary: "Couple at sunset",
     },
     {
-      primary: p4,
-      secondary: p2,
+      primary: about3,
+      secondary: about4,
       altPrimary: "Bride and groom embracing outdoors",
       altSecondary: "Bride smiling during celebration",
     },
     {
-      primary: p1,
-      secondary: p6,
+      primary: about5,
+      secondary: about6,
       altPrimary: "Couple portrait in formal wedding attire",
       altSecondary: "Wedding couple in a candid moment",
     },
@@ -1342,50 +1325,7 @@ function Trust() {
   return null;
 }
 
-const PORTFOLIO = [
-  {
-    img: p1,
-    couple: "Aanya & Vihaan",
-    loc: "Udaipur",
-    h: "sm:row-span-2",
-    gallery: [p1, p1Alt1, p1Alt2],
-  },
-  {
-    img: p2,
-    couple: "Riya & Arjun",
-    loc: "Pune",
-    h: "",
-    gallery: [p2, p2Alt1, p2Alt2],
-  },
-  {
-    img: p3,
-    couple: "Meera & Kabir",
-    loc: "Jaipur Palace",
-    h: "",
-    gallery: [p3, p3Alt1, p3Alt2],
-  },
-  {
-    img: p4,
-    couple: "Saanvi & Ishaan",
-    loc: "Goa Coastline",
-    h: "sm:row-span-2",
-    gallery: [p4, p4Alt1, p4Alt2],
-  },
-  {
-    img: p5,
-    couple: "Naina & Veer",
-    loc: "Mumbai Heritage",
-    h: "",
-    gallery: [p5, p5Alt1, p5Alt2],
-  },
-  {
-    img: p6,
-    couple: "Anushka & Aarav",
-    loc: "Delhi Reception",
-    h: "",
-    gallery: [p6, p6Alt1, p6Alt2],
-  },
-];
+const PORTFOLIO = COUPLE_STORIES;
 
 function Portfolio() {
   const ref = useReveal();
