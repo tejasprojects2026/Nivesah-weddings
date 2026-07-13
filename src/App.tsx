@@ -1356,7 +1356,7 @@ function Portfolio() {
         </div>
 
         <div
-          className="grid auto-rows-[240px] gap-4 sm:grid-cols-2 sm:auto-rows-[280px] lg:grid-cols-3 lg:gap-6"
+          className="grid auto-rows-[420px] grid-cols-[repeat(auto-fit,minmax(min(100%,347.2px),347.2px))] justify-center gap-4 lg:gap-6"
           data-reveal
         >
           {PORTFOLIO.map((p, i) => (
@@ -1372,6 +1372,7 @@ function Portfolio() {
                 alt={p.couple}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
+                style={{ objectPosition: p.coverPosition }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent opacity-90" />
               <div className="absolute inset-x-0 bottom-0 p-4 text-ivory sm:p-6 lg:p-8">
