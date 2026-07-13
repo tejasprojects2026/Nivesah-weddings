@@ -1356,7 +1356,7 @@ function Portfolio() {
         </div>
 
         <div
-          className="grid auto-rows-[420px] grid-cols-[repeat(auto-fit,minmax(min(100%,347.2px),347.2px))] justify-center gap-4 lg:gap-6"
+          className="grid auto-rows-[260px] gap-5 sm:grid-cols-2 sm:auto-rows-[280px] lg:grid-cols-3 lg:auto-rows-[260px] lg:gap-6"
           data-reveal
         >
           {PORTFOLIO.map((p, i) => (
@@ -1377,6 +1377,9 @@ function Portfolio() {
               <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent opacity-90" />
               <div className="absolute inset-x-0 bottom-0 p-4 text-ivory sm:p-6 lg:p-8">
                 <h3 className="mt-2 font-display text-xl sm:text-2xl lg:text-3xl">{p.couple}</h3>
+                <p className="mt-2 text-[0.62rem] uppercase tracking-[0.24em] text-ivory/70">
+                  {p.loc}
+                </p>
                 <span className="mt-3 inline-flex items-center gap-2 text-[0.7rem] tracking-[0.3em] uppercase opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                   View Story <ArrowUpRight className="size-3.5" />
                 </span>

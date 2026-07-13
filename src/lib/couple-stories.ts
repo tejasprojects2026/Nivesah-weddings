@@ -59,14 +59,22 @@ import c8_5 from "@/assets/optimized/couple8/PSC09308.jpg";
 import c8_6 from "@/assets/optimized/couple8/SMC04987.jpg";
 import c8_7 from "@/assets/optimized/couple8/SMC05005 (1).jpg";
 import c8_8 from "@/assets/optimized/couple8/SMC05037 (1).jpg";
+import c9_1 from "@/assets/prewedding shoot/DSC01711.jpg";
+import c9_2 from "@/assets/prewedding shoot/DSC01744.jpg";
+import c9_3 from "@/assets/prewedding shoot/DSC01803.jpg";
+import c10_1 from "@/assets/wedding/PSC07360.jpg";
+import c10_2 from "@/assets/wedding/PSC07518.jpg";
+import c10_3 from "@/assets/wedding/PSC07522.jpg";
 
 export const COUPLE_STORIES = [
-  { couple: "Aanya & Vihaan", loc: "Complete Wedding Story", h: "", coverPosition: "52% 30%", gallery: [c1_1, c1_2, c1_3, c1_4, c1_5] },
-  { couple: "Riya & Arjun", loc: "Complete Wedding Story", h: "", coverPosition: "52% 30%", gallery: [c2_1, c2_2, c2_3, c2_4] },
-  { couple: "Meera & Kabir", loc: "Complete Wedding Story", h: "", coverPosition: "50% 28%", gallery: [c3_1, c3_2, c3_3, c3_4, c3_5, c3_6, c3_7, c3_8] },
-  { couple: "Saanvi & Ishaan", loc: "Complete Wedding Story", h: "sm:row-span-2", coverPosition: "50% 34%", gallery: [c4_1, c4_2, c4_3, c4_4, c4_5, c4_6] },
-  { couple: "Naina & Veer", loc: "Complete Wedding Story", h: "", coverPosition: "50% 32%", gallery: [c5_1, c5_2, c5_3, c5_4, c5_5, c5_6] },
-  { couple: "Anushka & Aarav", loc: "Complete Wedding Story", h: "", coverPosition: "50% 30%", gallery: [c6_1, c6_2, c6_3, c6_4, c6_5, c6_6, c6_7, c6_8, c6_9, c6_10, c6_11, c6_12, c6_13, c6_14, c6_15, c6_16, c6_17, c6_18] },
-  { couple: "Kavya & Rohan", loc: "Complete Wedding Story", h: "", coverPosition: "50% 30%", gallery: [c7_1, c7_2, c7_3, c7_4, c7_5, c7_6] },
-  { couple: "Tara & Aditya", loc: "Complete Wedding Story", h: "", coverPosition: "50% 30%", gallery: [c8_1, c8_2, c8_3, c8_4, c8_5, c8_6, c8_7, c8_8] },
+  { couple: "Aanya & Vihaan", loc: "Haldi Ceremony", h: "sm:row-span-2", coverPosition: "52% 30%", gallery: [c1_1, c1_2, c1_3, c1_4, c1_5] },
+  { couple: "Riya & Arjun", loc: "Engagement Portraits", h: "", coverPosition: "52% 18%", gallery: [c2_1, c2_2, c2_3, c2_4] },
+  { couple: "Meera & Kabir", loc: "Wedding Rituals", h: "", coverPosition: "50% 28%", gallery: [c3_1, c3_2, c3_3, c3_4, c3_5, c3_6, c3_7, c3_8] },
+  { couple: "Saanvi & Ishaan", loc: "Couple Portraits", h: "sm:row-span-2", coverPosition: "50% 34%", gallery: [c4_1, c4_2, c4_3, c4_4, c4_5, c4_6] },
+  { couple: "Naina & Veer", loc: "Bridal Moments", h: "", coverPosition: "50% 32%", gallery: [c5_1, c5_2, c5_3, c5_4, c5_5, c5_6] },
+  { couple: "Anushka & Aarav", loc: "Groom Entry", h: "", coverPosition: "50% 30%", gallery: [c6_1, c6_2, c6_3, c6_4, c6_5, c6_6, c6_7, c6_8, c6_9, c6_10, c6_11, c6_12, c6_13, c6_14, c6_15, c6_16, c6_17, c6_18] },
+  { couple: "Kavya & Rohan", loc: "Wedding Portraits", h: "", coverPosition: "50% 30%", gallery: [c7_1, c7_2, c7_3, c7_4, c7_5, c7_6] },
+  { couple: "Tara & Aditya", loc: "Pre-Wedding Rituals", h: "", coverPosition: "50% 30%", gallery: [c8_1, c8_2, c8_3, c8_4, c8_5, c8_6, c8_7, c8_8] },
+  { couple: "Isha & Raghav", loc: "Pre-Wedding Shoot", h: "", coverPosition: "50% 32%", gallery: [c9_1, c9_2, c9_3] },
+  { couple: "Devika & Omkar", loc: "Wedding Ceremony", h: "", coverPosition: "50% 18%", gallery: [c10_1, c10_2, c10_3] },
 ].map((story) => ({ ...story, img: story.gallery[0] }));
