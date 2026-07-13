@@ -229,7 +229,7 @@ const YOUTUBE_FEATURED_VIDEOS = [
   },
   {
     id: "7lUWvXSbBz0",
-    title: "Engagement Highlights 2025 | Pratik X Disha | Nivesah Weddings",
+    title: "Engagement Highlights | Pratik X Disha | Nivesah Weddings",
     note: "An engagement highlight focused on intimate moments, portraits, and celebration energy.",
     label: "Engagement Reel",
     location: "Highlight Film",
