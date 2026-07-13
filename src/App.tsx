@@ -213,6 +213,27 @@ const YOUTUBE_FEATURED_VIDEOS = [
     label: "Signature Reel",
     location: "Wedding Highlight",
   },
+  {
+    id: "sNqLW8lehv8",
+    title: "Shreyans & Khushi | Cinematic Indian Wedding Film | Luxury Destination Wedding by Nivesah Weddings",
+    note: "A luxury wedding film woven with family, rituals, and destination celebration moments.",
+    label: "Destination Film",
+    location: "Wedding Story",
+  },
+  {
+    id: "3GljZV6g8RQ",
+    title: "Shreyans & Khushi Cinematic Destination Wedding | Luxury Indian Wedding Film by Nivesah In Lonavala",
+    note: "A destination wedding story with cinematic pacing, elegant details, and emotional frames.",
+    label: "Luxury Wedding",
+    location: "Lonavala Film",
+  },
+  {
+    id: "7lUWvXSbBz0",
+    title: "Engagement Highlights 2025 | Pratik X Disha | Nivesah Weddings",
+    note: "An engagement highlight focused on intimate moments, portraits, and celebration energy.",
+    label: "Engagement Reel",
+    location: "Highlight Film",
+  },
 ] as const;
 
 type EnquiryFormState = {
@@ -1494,18 +1515,12 @@ function YouTubeFeedSection() {
         <div className="relative grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_420px]" data-reveal>
           <div className="overflow-hidden border border-white/10 bg-[#181410] shadow-[0_30px_80px_-40px_rgba(0,0,0,0.7)]">
             <div className="border-b border-white/10 px-5 py-4 text-ivory sm:px-6">
-              <div className="flex items-center justify-between gap-4">
+              <div>
                 <div>
-                  <p className="text-[0.68rem] uppercase tracking-[0.3em] text-champagne/75">
-                    {activeVideo.label}
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl leading-tight sm:text-3xl">
+                  <h3 className="font-display text-2xl leading-tight sm:text-3xl">
                     {activeVideo.title}
                   </h3>
                 </div>
-                <span className="hidden text-[0.7rem] uppercase tracking-[0.28em] text-ivory/45 sm:block">
-                  {activeVideo.location}
-                </span>
               </div>
             </div>
             <div className="aspect-video">
@@ -1550,20 +1565,21 @@ function YouTubeFeedSection() {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            {YOUTUBE_FEATURED_VIDEOS.map((video, index) => {
-              const isActive = index === activeVideoIndex;
-              return (
-                <button
-                  key={`${video.id}-${index}`}
-                  type="button"
-                  onClick={() => setActiveVideoIndex(index)}
-                  className={`group relative overflow-hidden border p-0 text-left transition-all duration-500 ${
-                    isActive
-                      ? "border-olive bg-[linear-gradient(180deg,rgba(248,242,233,1),rgba(242,233,220,0.96))] shadow-[0_26px_70px_-42px_rgba(0,0,0,0.45)]"
-                      : "border-border bg-ivory/95 hover:-translate-y-1 hover:border-olive/40"
-                  }`}
-                >
+          <div className="max-h-[596px] overflow-y-auto pr-2">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              {YOUTUBE_FEATURED_VIDEOS.map((video, index) => {
+                const isActive = index === activeVideoIndex;
+                return (
+                  <button
+                    key={`${video.id}-${index}`}
+                    type="button"
+                    onClick={() => setActiveVideoIndex(index)}
+                    className={`group relative overflow-hidden border p-0 text-left transition-all duration-500 ${
+                      isActive
+                        ? "border-olive bg-[linear-gradient(180deg,rgba(248,242,233,1),rgba(242,233,220,0.96))] shadow-[0_26px_70px_-42px_rgba(0,0,0,0.45)]"
+                        : "border-border bg-ivory/95 hover:-translate-y-1 hover:border-olive/40"
+                    }`}
+                  >
                   <div className="grid min-h-[168px] grid-cols-[112px_1fr] sm:min-h-[190px] sm:grid-cols-[116px_1fr]">
                     <div className="relative overflow-hidden bg-[#0f0d0b]">
                       <img
@@ -1579,17 +1595,11 @@ function YouTubeFeedSection() {
                     </div>
                     <div className="flex flex-col justify-between p-4 sm:p-5">
                       <div>
-                        <p className="text-[0.64rem] uppercase tracking-[0.3em] text-olive/75">
-                          {video.label}
-                        </p>
-                        <h3 className="mt-3 font-display text-xl leading-[1.08] text-ink transition-colors group-hover:text-olive">
+                        <h3 className="font-display text-xl leading-[1.08] text-ink transition-colors group-hover:text-olive">
                           {video.title}
                         </h3>
                       </div>
                       <div className="mt-5 flex items-center justify-between gap-3">
-                        <p className="text-xs uppercase tracking-[0.22em] text-foreground/50">
-                          {video.location}
-                        </p>
                         <span
                           className={`inline-flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.26em] transition-all ${
                             isActive ? "text-olive" : "text-foreground/55 group-hover:text-olive"
@@ -1600,9 +1610,10 @@ function YouTubeFeedSection() {
                       </div>
                     </div>
                   </div>
-                </button>
-              );
-            })}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
