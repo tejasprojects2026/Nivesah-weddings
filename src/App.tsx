@@ -47,6 +47,7 @@ import insta10 from "@/assets/optimized/DSC03859.jpg";
 import cinematographyCard from "@/assets/optimized/DSC00916_edit.jpg";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 const WHATSAPP = "918446752571";
+const WEB3FORMS_ACCESS_KEY = "ac956c86-25cb-4834-8a34-2fc588d7f91a";
 const PHONE_DISPLAY = "84467 52571";
 const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@nivesahweddings3728";
 const YOUTUBE_CHANNEL_ID = "UCyQPjkbkF8GfzyXDfR8hnwg";
@@ -1721,6 +1722,7 @@ function ContactAndFaq({
     message: "",
   });
   const [errors, setErrors] = useState<EnquiryErrors>({});
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const validate = (values: EnquiryFormState) => {
     const nextErrors: EnquiryErrors = {};
 
@@ -1785,7 +1787,7 @@ function ContactAndFaq({
     onSelectService("");
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextErrors = validate(form);
 
@@ -1794,24 +1796,34 @@ function ContactAndFaq({
       return;
     }
 
-    const msg = encodeURIComponent(
-      [
-        "Hello Nivesah Weddings,",
-        "",
-        "I would like to enquire about your event coverage.",
-        "",
-        `Name: ${form.name.trim()}`,
-        `Phone Number: ${form.phone.trim()}`,
-        `Event Date: ${form.date}`,
-        `Event Location: ${form.location.trim()}`,
-        `Service Required: ${form.service.trim()}`,
-        "",
-        "Message:",
-        form.message.trim(),
-      ].join("\n"),
-    );
+    setFormStatus("submitting");
 
-    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "New Nivesah Weddings enquiry",
+          from_name: "Nivesah Weddings website",
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          event_date: form.date,
+          event_location: form.location.trim(),
+          service_required: form.service.trim(),
+          message: form.message.trim(),
+        }),
+      });
+      const result = (await response.json()) as { success?: boolean };
+
+      if (!response.ok || !result.success) throw new Error("Form submission failed");
+
+      setFormStatus("success");
+      setForm({ name: "", phone: "", date: "", location: "", service: "", message: "" });
+      onSelectService("");
+    } catch {
+      setFormStatus("error");
+    }
   };
 
   return (
@@ -1923,10 +1935,17 @@ function ContactAndFaq({
               />
               <button
                 type="submit"
+                disabled={formStatus === "submitting"}
                 className="w-full md:w-auto inline-flex items-center justify-center gap-3 mt-2 px-10 py-4 bg-champagne text-ink text-xs tracking-[0.35em] uppercase border border-champagne hover:bg-transparent hover:text-champagne transition-all duration-500"
               >
-                Send Enquiry <ArrowUpRight className="size-4" />
+                {formStatus === "submitting" ? "Sending..." : "Send Enquiry"} <ArrowUpRight className="size-4" />
               </button>
+              {formStatus === "success" ? (
+                <p className="text-sm text-champagne" role="status">Thank you — your enquiry has been sent.</p>
+              ) : null}
+              {formStatus === "error" ? (
+                <p className="text-sm text-terracotta" role="alert">We could not send your enquiry. Please try again or contact us on WhatsApp.</p>
+              ) : null}
             </form>
           </div>
         </div>
