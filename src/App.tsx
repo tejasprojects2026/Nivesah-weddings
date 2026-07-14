@@ -1196,10 +1196,10 @@ function Services({
                   strokeWidth={1.4}
                 />
               </div>
-              <h3 className="relative pr-10 font-display text-[1.65rem] leading-[1.1] sm:pr-12 sm:text-[1.9rem]">
+              <h3 className="relative min-h-[3.65rem] pr-10 font-display text-[1.65rem] leading-[1.1] sm:min-h-[4.2rem] sm:pr-12 sm:text-[1.9rem]">
                 {title}
               </h3>
-              <p className="relative mt-3 max-w-[22rem] text-sm leading-relaxed text-foreground/70 font-light">
+              <p className="relative mt-3 min-h-[4rem] max-w-[22rem] text-sm leading-relaxed text-foreground/70 font-light">
                 {desc}
               </p>
               <span className="relative mt-5 block h-px w-full bg-olive/35" />
