@@ -20,9 +20,9 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-import about1 from "@/assets/optimized/DSC07684_edit.jpg";
+import about1 from "@/assets/optimized/PSC09943.jpg";
 import about2 from "@/assets/optimized/DSC04547.jpg";
-import about3 from "@/assets/optimized/PSC09222.jpg";
+import about3 from "@/assets/optimized/DSC03859.jpg";
 import about4 from "@/assets/optimized/SMC02978.jpg";
 import about5 from "@/assets/optimized/PSC09365.jpg";
 import about6 from "@/assets/optimized/DSC03904.jpg";
@@ -127,7 +127,7 @@ const ABOUT_CAROUSEL = [
   {
     primary: about1,
     secondary: about2,
-    altPrimary: "Bride getting ready",
+    altPrimary: "Couple portrait with reflection",
     altSecondary: "Couple at sunset",
     badge: "Est. 2017 Â· Mumbai",
     kicker: "Bridal Mornings",
@@ -136,7 +136,7 @@ const ABOUT_CAROUSEL = [
   {
     primary: about3,
     secondary: about4,
-    altPrimary: "Bride and groom embracing outdoors",
+    altPrimary: "Couple celebrating their wedding ceremony",
     altSecondary: "Bride smiling during celebration",
     badge: "Destination Stories",
     kicker: "Golden Hour",
@@ -709,10 +709,6 @@ function Hero() {
                 </div>
               </div>
             </div>
-            <div className="absolute -top-8 -left-10 glass rounded-sm bg-ivory/88 border border-white/60 px-5 py-4 text-ink hidden xl:block">
-              <p className="eyebrow text-olive">Since 2017</p>
-              <p className="font-display text-2xl leading-none mt-2">100+ Weddings</p>
-            </div>
           </div>
         </div>
 
@@ -789,11 +785,11 @@ function AdCarouselSection() {
                     </span>
                   </div>
 
-                  <div className="relative h-full md:ml-10 md:mr-6 md:mb-12">
+                  <div className="relative h-full bg-ink md:ml-10 md:mr-6 md:mb-12">
                     <img
                       src={slide.primary}
                       alt={slide.altPrimary}
-                      className="h-[430px] w-full object-cover sm:h-[520px] md:h-[640px]"
+                      className="h-[430px] w-full object-contain sm:h-[520px] md:h-[640px]"
                       loading="lazy"
                     />
 
@@ -850,13 +846,13 @@ function About() {
     {
       primary: about1,
       secondary: about2,
-      altPrimary: "Bride getting ready",
+      altPrimary: "Couple portrait with reflection",
       altSecondary: "Couple at sunset",
     },
     {
       primary: about3,
       secondary: about4,
-      altPrimary: "Bride and groom embracing outdoors",
+      altPrimary: "Couple celebrating their wedding ceremony",
       altSecondary: "Bride smiling during celebration",
     },
     {
@@ -880,7 +876,7 @@ function About() {
     <section id="about" ref={ref} className="relative bg-ivory py-10 lg:py-16">
       <div className="mx-auto grid max-w-[1400px] gap-10 px-5 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-10">
         <div className="lg:col-span-6 relative" data-reveal>
-          <div className="relative h-[420px] w-full sm:h-[520px] lg:h-[560px]">
+          <div className="relative aspect-[2/3] w-full sm:aspect-auto sm:h-[520px] lg:h-[560px]">
             {slides.map((slide, index) => (
               <img
                 key={slide.primary}
@@ -1026,6 +1022,9 @@ function InstagramShowcase() {
                   <p className="mt-6 max-w-md font-display text-2xl leading-[1.08] text-ink sm:text-3xl lg:text-[2.2rem]">
                     {activeStory.title}
                   </p>
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-foreground/70 sm:text-[0.98rem]">
+                    {activeStory.caption}
+                  </p>
                   <a
                     href={activeStory.href}
                     target="_blank"
@@ -1034,15 +1033,6 @@ function InstagramShowcase() {
                   >
                     View Original Post <ArrowUpRight className="size-4" />
                   </a>
-                </div>
-
-                <div className="mt-8 border-t border-border/70 pt-5 sm:max-w-md">
-                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/45">
-                    Original Caption
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-foreground/70 sm:text-[0.98rem]">
-                    {activeStory.caption}
-                  </p>
                 </div>
               </div>
             </div>
@@ -1250,6 +1240,21 @@ function Experience() {
 
         <div className="relative grid gap-8 md:grid-cols-5 md:gap-4" data-reveal>
           <svg
+            className="pointer-events-none absolute left-1/2 top-12 h-[calc(100%-3rem)] w-12 -translate-x-1/2 text-champagne/40 md:hidden"
+            viewBox="0 0 40 1000"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M20 0 C 5 140, 35 250, 20 400 S 5 700, 20 1000"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              pathLength={100}
+              className="animate-dashed-flow"
+            />
+          </svg>
+          <svg
             className="hidden md:block absolute top-12 left-[3%] right-[3%] h-12 text-champagne/40"
             viewBox="0 0 1000 40"
             preserveAspectRatio="none"
@@ -1321,25 +1326,25 @@ function TrustStat({
   const value = useCountUp(active, target);
 
   return (
-    <>
+    <div className="flex flex-col items-center text-center">
       <div
         className={`text-4xl text-olive leading-none ${
-          compact ? "text-[2rem] sm:text-[2.15rem] md:text-[2.35rem]" : "sm:text-5xl md:text-6xl"
+          compact ? "text-[2.65rem] sm:text-[2.9rem] md:text-[3.2rem]" : "sm:text-5xl md:text-6xl"
         }`}
         style={{ fontFamily: '"Prata", serif' }}
       >
         {format(value)}
       </div>
       <p
-        className={`max-w-[16ch] uppercase text-foreground/60 ${
+        className={`max-w-[16ch] text-center uppercase text-foreground/60 ${
           compact
-            ? "mt-1.5 text-[0.5rem] tracking-[0.14em] sm:mt-2 sm:text-[0.54rem] sm:tracking-[0.18em]"
+            ? "mt-2 text-[0.6rem] tracking-[0.16em] sm:text-[0.65rem] sm:tracking-[0.2em]"
             : "mt-3 text-[0.65rem] tracking-[0.28em] sm:mt-4 sm:text-[0.72rem] sm:tracking-[0.34em]"
         }`}
       >
         {label}
       </p>
-    </>
+    </div>
   );
 }
 
@@ -1421,7 +1426,7 @@ function Portfolio() {
         }}
       >
         {activeStory ? (
-          <DialogContent className="max-h-[90svh] max-w-[calc(100vw-1.5rem)] overflow-auto border-none bg-[oklch(0.965_0.012_78)] p-0 sm:max-w-6xl sm:overflow-hidden">
+          <DialogContent className="h-[90svh] max-h-[90svh] max-w-[calc(100vw-1.5rem)] touch-pan-y overflow-y-auto overscroll-contain border-none bg-[oklch(0.965_0.012_78)] p-0 [-webkit-overflow-scrolling:touch] sm:h-auto sm:max-w-6xl sm:overflow-hidden">
             <DialogTitle className="sr-only">{activeStory.couple} gallery</DialogTitle>
             <div className="grid lg:grid-cols-[minmax(0,1.6fr)_360px]">
               <div className="bg-ink">
@@ -1431,16 +1436,15 @@ function Portfolio() {
                   className="h-[42svh] w-full object-contain sm:h-[55vh] lg:h-[80vh]"
                 />
               </div>
-              <div className="p-5 sm:p-6 lg:p-8">
+              <div className="p-5 sm:p-6 lg:h-[90svh] lg:overflow-y-auto lg:overscroll-contain lg:p-8 [-webkit-overflow-scrolling:touch]">
                 <p className="eyebrow flex items-center gap-2">
-                  <MapPin className="size-3" /> {activeStory.loc}
+                  <Heart className="size-3" /> {activeStory.loc}
                 </p>
                 <h3 className="mt-3 font-display text-3xl leading-none text-ink sm:text-4xl">
                   {activeStory.couple}
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-foreground/70">
-                  Explore related frames from the same story. Click any image below to preview it
-                  in the main view.
+                  {activeStory.description}
                 </p>
 
                 <div className="mt-8 grid grid-cols-3 gap-3">
