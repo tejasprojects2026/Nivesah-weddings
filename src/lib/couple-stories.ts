@@ -30,9 +30,6 @@ import c5_6 from "@/assets/optimized/couple5/DSC02689.jpg";
 import c6_1 from "@/assets/optimized/couple6/PSC09376.jpg";
 import c6_2 from "@/assets/optimized/couple6/PSC09415 (1).jpg";
 import c6_4 from "@/assets/optimized/couple6/PSC09448.jpg";
-import c6_5 from "@/assets/optimized/couple6/PSC09489 (1).jpg";
-import c6_7 from "@/assets/optimized/couple6/PSC09523.jpg";
-import c6_8 from "@/assets/optimized/couple6/PSC09526.jpg";
 import c6_9 from "@/assets/optimized/couple6/PSC09734.jpg";
 import c6_10 from "@/assets/optimized/couple6/PSC09736.jpg";
 import c6_11 from "@/assets/optimized/couple6/PSC09755.jpg";
@@ -66,12 +63,12 @@ import c10_3 from "@/assets/wedding/PSC07522.jpg";
 export const COUPLE_STORIES = [
   { couple: "Aanya & Vihaan", loc: "Haldi Ceremony", description: "A sunlit celebration of colour, joyful rituals, and the kind of laughter that fills every frame.", h: "sm:row-span-2", coverPosition: "52% 30%", gallery: [c1_1, c1_2, c1_3, c1_4, c1_5] },
   { couple: "Riya & Arjun", loc: "Engagement Portraits", description: "An effortless warmth captured in quiet smiles, close embraces, and the beauty of a new beginning.", h: "", coverPosition: "52% 18%", gallery: [c2_1, c2_2, c2_3, c2_4] },
-  { couple: "Meera & Kabir", loc: "Wedding Rituals", description: "Vibrant rituals, intimate glances, and moments shared with the people who matter most.", h: "", coverPosition: "50% 28%", gallery: [c3_1, c3_2, c3_3, c3_4, c3_5, c3_6, c3_7, c3_8] },
-  { couple: "Saanvi & Ishaan", loc: "Couple Portraits", description: "Timeless elegance balanced with an easy, unmistakable connection.", h: "sm:row-span-2", coverPosition: "50% 34%", gallery: [c4_1, c4_2, c4_3, c4_4, c4_5, c4_6] },
+  { couple: "Meera & Kabir", loc: "Pre Wedding Shoot", description: "Vibrant rituals, intimate glances, and moments shared with the people who matter most.", h: "", coverPosition: "50% 28%", gallery: [c3_1, c3_2, c3_3, c3_4, c3_5, c3_6, c3_7, c3_8] },
+  { couple: "Saanvi & Ishaan", loc: "Engagement Ceremony", description: "Timeless elegance balanced with an easy, unmistakable connection.", h: "sm:row-span-2", coverPosition: "50% 34%", gallery: [c4_1, c4_2, c4_3, c4_4, c4_5, c4_6] },
   { couple: "Naina & Veer", loc: "Bridal Moments", description: "Tender bridal details, anticipation, and the beauty of shared traditions.", h: "", coverPosition: "50% 32%", gallery: [c5_1, c5_2, c5_3, c5_4, c5_5, c5_6] },
-  { couple: "Anushka & Aarav", loc: "Groom Entry", description: "From the groom entry to the ceremony's most heartfelt moments, every frame carries joyful energy and grace.", h: "", coverPosition: "50% 30%", gallery: [c6_1, c6_2, c6_4, c6_5, c6_7, c6_8, c6_9, c6_10, c6_11, c6_12, c6_13, c6_15, c6_16, c6_17, c6_18] },
+  { couple: "Anushka & Aarav", loc: "Wedding Ceremony", description: "From the groom entry to the ceremony's most heartfelt moments, every frame carries joyful energy and grace.", h: "", coverPosition: "50% 30%", img: c6_18, gallery: [c6_1, c6_2, c6_4, c6_9, c6_10, c6_11, c6_12, c6_13, c6_15, c6_16, c6_17, c6_18] },
   { couple: "Kavya & Rohan", loc: "Wedding Portraits", description: "A day of colour, celebration, and a love that feels completely at ease.", h: "", coverPosition: "50% 30%", gallery: [c7_1, c7_2, c7_3, c7_4, c7_5, c7_6] },
   { couple: "Tara & Aditya", loc: "Haldi Ceremony", description: "A joyful haldi celebration woven with vibrant colour, playful moments, and the warmth of family traditions.", h: "", coverPosition: "50% 30%", gallery: [c8_1, c8_2, c8_3, c8_4, c8_5, c8_6, c8_7, c8_8] },
   { couple: "Isha & Raghav", loc: "Pre-Wedding Shoot", description: "A relaxed and romantic chapter, celebrating chemistry in every unguarded moment.", h: "", coverPosition: "50% 32%", gallery: [c9_1, c9_2, c9_3] },
   { couple: "Devika & Omkar", loc: "Wedding Ceremony", description: "A heartfelt blend of timeless rituals, family blessings, and enduring love.", h: "", coverPosition: "50% 18%", gallery: [c10_1, c10_2, c10_3] },
-].map((story) => ({ ...story, img: story.gallery[0] }));
+].map((story) => ({ ...story, img: story.img ?? story.gallery[0] }));
