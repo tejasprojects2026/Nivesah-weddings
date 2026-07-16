@@ -1361,7 +1361,7 @@ function Portfolio() {
 
   const openStory = (story: (typeof PORTFOLIO)[number]) => {
     setActiveStory(story);
-    setActiveImage(story.gallery[0]);
+    setActiveImage(story.img);
   };
 
   return (
@@ -1431,7 +1431,7 @@ function Portfolio() {
             <div className="grid lg:grid-cols-[minmax(0,1.6fr)_360px]">
               <div className="bg-ink">
                 <img
-                  src={activeImage ?? activeStory.gallery[0]}
+                  src={activeImage ?? activeStory.img}
                   alt={activeStory.couple}
                   className="h-[42svh] w-full object-contain sm:h-[55vh] lg:h-[80vh]"
                 />
@@ -1449,7 +1449,7 @@ function Portfolio() {
 
                 <div className="mt-8 grid grid-cols-3 gap-3">
                   {activeStory.gallery.map((image, index) => {
-                    const isActive = (activeImage ?? activeStory.gallery[0]) === image;
+                    const isActive = (activeImage ?? activeStory.img) === image;
                     return (
                       <button
                         key={`${activeStory.couple}-${index}`}
