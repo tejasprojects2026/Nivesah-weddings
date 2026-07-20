@@ -215,3 +215,10 @@
 @utility animate-reveal { animation: reveal 1s cubic-bezier(.2,.7,.2,1) both; }
 @utility animate-kenburns { animation: kenburns 18s ease-out infinite alternate; }
 @utility animate-dashed-flow { animation: dashed-flow 5.2s linear infinite; }
+
+@media (max-width: 639px) {
+  /* Centre the featured couple in the second portrait slide. */
+  .hero-mobile-slide-1 img {
+    object-position: 32% center;
+  }
+}

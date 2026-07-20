@@ -29,6 +29,9 @@ import about6 from "@/assets/optimized/DSC03904.jpg";
 import heroSlide1 from "@/assets/optimized/DSC08864.jpg";
 import heroSlide2 from "@/assets/optimized/DSC08674.jpg";
 import heroSlide3 from "@/assets/optimized/PSC09782.jpg";
+import heroMobileSlide1 from "@/assets/optimized/couple5/DSC02667.jpg";
+import heroMobileSlide2 from "@/assets/optimized/couple7/SMC08424 (2).jpg";
+import heroMobileSlide3 from "@/assets/optimized/couple8/SMC05005 (1).jpg";
 import heroCard1 from "@/assets/optimized/SMC04342.jpg";
 import heroCard2 from "@/assets/optimized/PSC09938 (1)-01.jpeg";
 import heroCard3 from "@/assets/optimized/4N5A3979.jpg";
@@ -156,14 +159,17 @@ const ABOUT_CAROUSEL = [
 const HERO_BACKGROUND_SLIDES = [
   {
     image: heroSlide1,
+    mobileImage: heroMobileSlide1,
     alt: "Couple celebrating together beneath a pastel floral wedding wall",
   },
   {
     image: heroSlide2,
+    mobileImage: heroMobileSlide2,
     alt: "Bride and groom dancing joyfully during a wedding celebration",
   },
   {
     image: heroSlide3,
+    mobileImage: heroMobileSlide3,
     alt: "Bride and groom sharing a sparkler-lit wedding moment",
   },
 ] as const;
@@ -593,17 +599,24 @@ function Hero() {
     <section id="top" className="relative min-h-[100svh] w-full overflow-hidden grain bg-ink">
       <div className="absolute inset-0">
         {HERO_BACKGROUND_SLIDES.map((slide, index) => (
-          <img
+          <div
             key={slide.image}
-            src={slide.image}
-            alt={slide.alt}
-            loading={index === 0 ? "eager" : "lazy"}
-            decoding="async"
-            fetchPriority={index === 0 ? "high" : "low"}
-            className={`absolute inset-0 h-full w-full object-cover animate-kenburns transition-opacity duration-[1600ms] ${
+            className={`hero-mobile-slide-${index} absolute inset-0 transition-opacity duration-[1600ms] ${
               activeHeroSlide === index ? "opacity-100" : "opacity-0"
             }`}
-          />
+          >
+            <picture>
+              <source media="(max-width: 639px)" srcSet={slide.mobileImage} />
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                fetchPriority={index === 0 ? "high" : "low"}
+                className="absolute inset-0 h-full w-full object-cover object-center sm:animate-kenburns"
+              />
+            </picture>
+          </div>
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/30 to-ink/80" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_rgba(0,0,0,0.6)_100%)]" />
