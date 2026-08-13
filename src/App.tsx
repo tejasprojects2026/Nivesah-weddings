@@ -20,35 +20,41 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-import about1 from "@/assets/optimized/PSC09943.jpg";
-import about2 from "@/assets/optimized/DSC04547.jpg";
-import about3 from "@/assets/optimized/DSC03859.jpg";
-import about4 from "@/assets/optimized/SMC02978.jpg";
-import about5 from "@/assets/optimized/PSC09365.jpg";
-import about6 from "@/assets/optimized/DSC03904.jpg";
-import heroSlide1 from "@/assets/optimized/DSC08864.jpg";
-import heroSlide2 from "@/assets/optimized/DSC08674.jpg";
-import heroSlide3 from "@/assets/optimized/PSC09782.jpg";
-import heroMobileSlide1 from "@/assets/optimized/couple5/DSC02667.jpg";
-import heroMobileSlide2 from "@/assets/optimized/couple7/SMC08424 (2).jpg";
-import heroMobileSlide3 from "@/assets/optimized/couple8/SMC05005 (1).jpg";
-import heroCard1 from "@/assets/optimized/SMC04342.jpg";
-import heroCard2 from "@/assets/optimized/PSC09938 (1)-01.jpeg";
-import heroCard3 from "@/assets/optimized/4N5A3979.jpg";
-import nivesahLogo from "@/assets/optimized/Nivesah 4K-3.png";
+import about1 from "@/assets/optimized/PSC09943.webp";
+import about2 from "@/assets/optimized/DSC04547.webp";
+import about3 from "@/assets/optimized/DSC03859.webp";
+import about4 from "@/assets/optimized/SMC02978.webp";
+import about5 from "@/assets/optimized/PSC09365.webp";
+import about6 from "@/assets/optimized/DSC03904.webp";
+import heroSlide1 from "@/assets/optimized/DSC08864.webp";
+import heroSlide2 from "@/assets/optimized/DSC08674.webp";
+import heroSlide3 from "@/assets/optimized/PSC09782.webp";
+import heroMobileSlide1 from "@/assets/optimized/couple5/DSC02667.webp";
+import heroMobileSlide2 from "@/assets/optimized/couple7/SMC08424 (2).webp";
+import heroMobileSlide3 from "@/assets/optimized/couple8/SMC05005 (1).webp";
+import heroCard1 from "@/assets/optimized/SMC04342.webp";
+import heroCard2 from "@/assets/optimized/PSC09938 (1)-01.webp";
+import heroCard3 from "@/assets/optimized/4N5A3979.webp";
+import nivesahLogo from "@/assets/optimized/Nivesah 4K-3.webp";
 import { COUPLE_STORIES } from "@/lib/couple-stories";
-import insta1 from "@/assets/optimized/PSC09943.jpg";
-import insta2 from "@/assets/optimized/DSC09821_edit.jpg";
-import insta3 from "@/assets/optimized/SMC08424 (2).jpg";
-import insta4 from "@/assets/optimized/PSC02421.jpg";
-import insta5 from "@/assets/optimized/DSC05742.jpg";
-import insta6 from "@/assets/optimized/PSC09770.jpg";
-import insta7 from "@/assets/optimized/DSC07010.jpg";
-import insta8 from "@/assets/optimized/SMC02963.jpg";
-import insta9 from "@/assets/optimized/PSC06606 (1).jpg";
-import insta10 from "@/assets/optimized/DSC03859.jpg";
-import cinematographyCard from "@/assets/optimized/DSC00916_edit.jpg";
+import insta1 from "@/assets/optimized/PSC09943.webp";
+import insta2 from "@/assets/optimized/DSC09821_edit.webp";
+import insta3 from "@/assets/optimized/SMC08424 (2).webp";
+import insta4 from "@/assets/optimized/PSC02421.webp";
+import insta5 from "@/assets/optimized/DSC05742.webp";
+import insta6 from "@/assets/optimized/PSC09770.webp";
+import insta7 from "@/assets/optimized/DSC07010.webp";
+import insta8 from "@/assets/optimized/SMC02963.webp";
+import insta9 from "@/assets/optimized/PSC06606 (1).webp";
+import insta10 from "@/assets/optimized/DSC03859.webp";
+import cinematographyCard from "@/assets/optimized/DSC00916_edit.webp";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 const WHATSAPP = "918446752571";
 const WEB3FORMS_ACCESS_KEY = "ac956c86-25cb-4834-8a34-2fc588d7f91a";
 const PHONE_DISPLAY = "84467 52571";
@@ -64,6 +70,15 @@ const SOCIALS = [
   { icon: Instagram, href: INSTAGRAM_URL, label: "Instagram" },
   { icon: Facebook, href: "https://www.facebook.com/nivesahweddings/", label: "Facebook" },
   { icon: Youtube, href: YOUTUBE_CHANNEL_URL, label: "YouTube" },
+] as const;
+
+const NAV_LINKS = [
+  ["About", "#about"],
+  ["Services", "#services"],
+  ["Experience", "#experience"],
+  ["Portfolio", "#portfolio"],
+  ["Stories", "#testimonials"],
+  ["Contact", "#contact"],
 ] as const;
 
 const INSTAGRAM_SHOWCASE = [
@@ -1143,7 +1158,7 @@ const SERVICES = [
     desc: "On-ground coordination so the day runs as designed.",
     image: insta8,
   },
-];
+] as const;
 
 function Services({
   onSelectService,
